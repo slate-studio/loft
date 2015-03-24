@@ -1,10 +1,17 @@
-# add file icon
-# add selectbox for delete
-# add modal dialog mode
+# -----------------------------------------------------------------------------
+# Author: Alexander Kravets <alex@slatestudio.com>,
+#         Slate Studio (http://www.slatestudio.com)
+#
+# Coding Guide:
+#   https://github.com/thoughtbot/guides/tree/master/style/coffeescript
+# -----------------------------------------------------------------------------
 
+# -----------------------------------------------------------------------------
+# Loft Asset Item
+# -----------------------------------------------------------------------------
 class @LoftAssetItem extends Item
   constructor: (@module, @path, @object, @config) ->
-    @$el =$ "<div class='item asset' data-id='#{ @object._id }' data-title=''></div>"
+    @$el =$ "<div class='item asset asset-#{ @object.type }' data-id='#{ @object._id }' data-title=''></div>"
     @render()
 
 

@@ -1,0 +1,26 @@
+//
+// Upload Button
+//
+
+.asset-upload {
+  @include absolutePosition(0 0 inherit inherit);
+  @extend .icon-plus;
+  cursor: pointer;
+  right: -40px;
+  padding-left: 80px;
+  &:focus { outline: none; }
+}
+
+.list header {
+  .asset-upload + .search { @include absolutePosition(0 40px inherit inherit); }
+}
+
+.list.list-search header {
+  .asset-upload + .search { @include absolutePosition(0 0 inherit 0); }
+}
+
+.module.assets.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
+
+
+
+

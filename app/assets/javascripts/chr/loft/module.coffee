@@ -1,3 +1,14 @@
+# -----------------------------------------------------------------------------
+# Author: Alexander Kravets <alex@slatestudio.com>,
+#         Slate Studio (http://www.slatestudio.com)
+#
+# Coding Guide:
+#   https://github.com/thoughtbot/guides/tree/master/style/coffeescript
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Loft
+# -----------------------------------------------------------------------------
 class @Loft
   constructor: (title, @resource, @resourcePath) ->
     @module = {}
@@ -30,9 +41,11 @@ class @Loft
 
   _nested_list_config: (moduleName, assetType) ->
     arrayStoreConfig =
-      resource:   @resource
-      path:       @resourcePath
-      searchable: true
+      resource:    @resource
+      path:        @resourcePath
+      searchable:  true
+      sortBy:      'created_at'
+      sortReverse: true
 
     if assetType
       $.extend(arrayStoreConfig, { urlParams: { by_type:  assetType } })

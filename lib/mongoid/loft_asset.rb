@@ -26,7 +26,7 @@ module Mongoid
 
       # increment value, used by uploader
       field :_number, type: Integer
-      increments :number
+      increments :_number
 
       # uploaders
       mount_uploader :file, AssetFileUploader

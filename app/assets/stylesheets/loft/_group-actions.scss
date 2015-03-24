@@ -1,0 +1,13 @@
+//
+// Group Actions
+//
+
+.assets-group-actions {
+  @include absolutePosition(0 0 0 0); background: $white;
+  .unselect { @include headerButton($stableColor); float: left;  margin-left: 1em; }
+  .delete   { @include headerButton($assertiveColor); float: right; margin-right: 1em; }
+}
+
+
+
+
