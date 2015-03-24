@@ -1,0 +1,107 @@
+//
+// Styles for Loft Character CMS plugin, this should be included in
+// admin.scss (default)
+//
+// - mobile version
+//
+
+/* Tablet Layout */
+@media #{$tablet} {
+  .module.assets {
+    .list:not(:first-child) {
+      .items {
+        .item { min-height: 49px; }
+        .item-title    { display: inline-block; }
+        .item-subtitle { display: inline; float: right; }
+        .item.has-subtitle { padding: 1em; }
+      }
+    }
+  }
+}
+
+
+// Group Actions
+.assets-group-actions {
+  @include absolutePosition(0 0 0 0); background: $white;
+  .unselect { @include headerButton($stableColor); float: left;  margin-left: 1em; }
+  .delete   { @include headerButton($assertiveColor); float: right; margin-right: 1em; }
+}
+
+
+// Icons for Parrent List
+.list.assets {
+  .items .item {
+    .item-title { margin-left: 2.05em; }
+    &:before {
+      content: '';
+      position: absolute;
+      display: block; width: 16px; height: 16px;
+      margin-right: 1em;
+      background-color: $lightColor;
+    }
+  }
+}
+
+
+// Upload Button
+.asset-upload {
+  @include absolutePosition(0 0 inherit inherit);
+  @extend .icon-plus;
+  cursor: pointer;
+  right: -40px;
+  padding-left: 80px;
+  &:focus { outline: none; }
+}
+
+.list header {
+  .asset-upload + .search { @include absolutePosition(0 40px inherit inherit); }
+}
+
+.list.list-search header {
+  .asset-upload + .search { @include absolutePosition(0 0 inherit 0); }
+}
+
+
+// Loader Spinner
+.module.assets.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
+
+
+// List Item
+.item.asset {
+  .item-title {
+    cursor: pointer;
+    position: relative;
+    &:hover { color: $positiveColor; text-decoration: underline; }
+  }
+  .asset-name {
+    display: none;
+    width: 50%;
+    position: absolute;
+    line-height: 1;
+    padding: 0em .3em .3em .375em;
+    top: .55em; bottom: .55em; left: 4.5em;
+    z-index: 1;
+    border-radius: 3px;
+    &:focus {
+      outline: none !important;
+      border: 1px solid $stableColor;
+      box-shadow: 0 0 10px $lightColor;
+    }
+  }
+  .asset-checkbox {
+    position: relative; top: -.25em;
+    margin-right: 1em;
+  }
+  .asset-icon {
+    display: inline-block; width: 16px; height: 16px;
+    margin-right: 1em;
+    background-color: $lightColor; }
+
+  &.edit-name {
+    .asset-name { display: block; }
+  }
+}
+
+
+
+
