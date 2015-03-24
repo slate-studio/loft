@@ -17,8 +17,9 @@ class @Loft
     @_uploadsCounter = 0
 
     moduleConfig =
-      title: title
+      title:                title
       showNestedListsAside: true
+      itemClass:            LoftTypeItem
       items:
         assets_all:      @_nested_list_config 'All'
         assets_images:   @_nested_list_config 'Images',   'image'
@@ -37,6 +38,17 @@ class @Loft
   _initialize_module: (module) ->
     @module = module
     @store  = @module.nestedLists.assets_all.config.arrayStore
+
+    # API method
+    @module.showModal = @showModal
+
+    # modal close button
+    @module.rootList.$modalCloseBtn =$ "<a href='#' class='modal-close'>Cancel</a>"
+    @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
+    @module.rootList.$modalCloseBtn.on 'click', (e) =>
+      e.preventDefault()
+      @module.$el.removeClass('module-modal')
+      @module.hide()
 
 
   _nested_list_config: (moduleName, assetType) ->
@@ -87,8 +99,9 @@ class @Loft
     @_start_file_upload()
     @store.push obj,
       onSuccess: (object) => @_finish_file_upload(list)
-      onError:   (errors) => @_finish_file_upload(list)
-        # + process validation errors, if any
+      onError:   (errors) =>
+        @_finish_file_upload(list)
+        chr.showError('Can\'t upload file.')
 
 
   _start_file_upload: ->
@@ -106,6 +119,19 @@ class @Loft
       visibleList = @module.visibleNestedListShownWithParent()
       if visibleList.name != 'assets_all'
         visibleList.updateItems()
+
+
+  # `chr.modules.assets` module method
+  # actions to be modified
+  #  - back to root list
+  #  - close modal
+  showModal: (type='all')->
+    @$el.addClass('module-modal')
+
+    @showNestedList("assets_#{ type }")
+    @rootList.$items.children("[href='#/assets/assets_#{ type }']").addClass('active')
+
+    @show()
 
 
 
