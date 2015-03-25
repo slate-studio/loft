@@ -1,0 +1,6 @@
+.input-loft-image {
+  min-height: 9.5em;
+  .image img { max-height: 6em; margin: .25em .75em 0 0; float: left; }
+  .choose, .remove { line-height: 1.5; color: $positiveColor; }
+  .remove { font-size: .8em; }
+}
