@@ -8,6 +8,8 @@
 
 # -----------------------------------------------------------------------------
 # Loft
+# TODO:
+#  - back to root list
 # -----------------------------------------------------------------------------
 class @Loft
   constructor: (title, @resource, @resourcePath) ->
@@ -40,15 +42,14 @@ class @Loft
     @store  = @module.nestedLists.assets_all.config.arrayStore
 
     # API method
-    @module.showModal = @showModal
+    @module.showModal = (assetType, selectMultipleAssets, callback) =>
+      @showModal(assetType, selectMultipleAssets, callback)
+    @selectMultipleAssets = true
 
     # modal close button
     @module.rootList.$modalCloseBtn =$ "<a href='#' class='modal-close'>Cancel</a>"
     @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
-    @module.rootList.$modalCloseBtn.on 'click', (e) =>
-      e.preventDefault()
-      @module.$el.removeClass('module-modal')
-      @module.hide()
+    @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
 
 
   _nested_list_config: (moduleName, assetType) ->
@@ -69,6 +70,7 @@ class @Loft
       itemClass:          LoftAssetItem
       arrayStore:         new MongosteenArrayStore(arrayStoreConfig)
       onListInit: (list) => @_inititialize_list(list)
+      onListShow: (list) => @_clear_assets_selection()
 
     return config
 
@@ -89,7 +91,7 @@ class @Loft
         @_upload(file, list) for file in files
 
     # group actions toolbar
-    list.$groupActions = new LoftGroupActions(list, this)
+    list.groupActions = new LoftGroupActions(list, this)
 
 
   _upload: (file, list) ->
@@ -115,23 +117,37 @@ class @Loft
       @module.$el.removeClass('assets-uploading')
 
       # update data in list if it's not assets_all,
-      # in there new objects are added automatically
+      # in assets_all new objects are added automatically
       visibleList = @module.visibleNestedListShownWithParent()
       if visibleList.name != 'assets_all'
         visibleList.updateItems()
 
 
-  # `chr.modules.assets` module method
-  # actions to be modified
-  #  - back to root list
-  #  - close modal
-  showModal: (type='all')->
-    @$el.addClass('module-modal')
+  _clear_assets_selection: ->
+    for name, list of @module.nestedLists
+      list.groupActions.hide()
+      list.$items.find('.asset-checkbox').prop('checked', false)
 
-    @showNestedList("assets_#{ type }")
-    @rootList.$items.children("[href='#/assets/assets_#{ type }']").addClass('active')
 
-    @show()
+  closeModal: ->
+    @selectMultipleAssets = true
+    @_clear_assets_selection()
+    @module.$el.removeClass('module-modal')
+    @module.hide()
+
+
+  # chr.modules.assets.showModal()
+  showModal: (assetType='all', @selectMultipleAssets=false, @onAcceptCallback=$.noop) ->
+    # modal mode
+    @module.$el.addClass('module-modal')
+    # show nested list
+    @module.showNestedList("assets_#{ assetType }")
+    # select active item
+    @module.rootList.$items.children().removeClass('active')
+    @module.rootList.$items.children("[href='#/assets/assets_#{ assetType }']").addClass('active')
+    # show module
+    @module.show()
+
 
 
 

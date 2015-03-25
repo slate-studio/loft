@@ -2,22 +2,8 @@
 // Styles for Loft Character CMS plugin, this should be included in
 // admin.scss (default)
 //
-// - mobile version
+// - mobile version for assets list
 //
-
-/* Tablet Layout */
-@media #{$tablet} {
-  .module.assets {
-    .list:not(:first-child) {
-      .items {
-        .item { min-height: 49px; }
-        .item-title    { display: inline-block; }
-        .item-subtitle { display: inline; float: right; }
-        .item.has-subtitle { padding: 1em; }
-      }
-    }
-  }
-}
 
 @import "loft/group-actions";
 @import "loft/icons";
