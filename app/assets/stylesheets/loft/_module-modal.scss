@@ -8,7 +8,7 @@
 
 
   &.module-modal {
-    z-index: 10; left: .5em; right: .5em; top: .5em; bottom: 0em;
+    z-index: 1100; left: .5em; right: .5em; top: .5em; bottom: 0em;
 
     &:before {
       @include position(fixed, 0px 0px 0px 0px);
