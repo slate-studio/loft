@@ -5,7 +5,7 @@
   .image img          { max-height: 6em; margin: .25em .75em .25em 0; float: left; }
   .choose, .remove    { color: $positiveColor; display: inline-block; }
 
-  &.has-value .choose { margin-top: .5em; }
+  &.has-value .choose { margin-top: .25em; }
   &.has-value .remove { display: inline-block; }
   .remove             { display: none; font-size: .8em; margin-top: .5em; }
 }

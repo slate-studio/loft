@@ -15,6 +15,8 @@ class @InputLoftImage extends InputString
 
     @$input =$ "<input type='string' name='#{ @name }' value='#{ @_valueSafe() }' id='#{ @name }' />"
     @$el.append @$input
+    @$input.on 'change', (e) =>
+      @updateValue($(e.target).val())
 
     @_add_image()
     @_add_choose_button()
