@@ -6,7 +6,7 @@ module Loft
       include CarrierWave::MiniMagick
 
       def store_dir
-        "assets/#{ model._number }"
+        "loft/#{ model._number }"
       end
 
       version :small_150, if: :is_image? do

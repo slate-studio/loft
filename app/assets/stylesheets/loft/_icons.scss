@@ -3,7 +3,7 @@
 //
 
 @mixin asset-icon-base {
-  background-image: asset-url('assets/loft/library@3x.png');
+  background-image: image-url('loft/library@3x.png');
   background-size: 32px 112px;
   width: 16px; height: 16px;
 }
