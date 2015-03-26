@@ -11,12 +11,16 @@
 # -----------------------------------------------------------------------------
 class @InputLoftImage extends InputString
   _addInput: ->
+    @config.placeholder ?= 'Image url'
+
+    @$input =$ "<input type='string' name='#{ @name }' value='#{ @_valueSafe() }' id='#{ @name }' />"
+    @$el.append @$input
+
     @_add_image()
     @_add_choose_button()
     @_add_remove_button()
+    @_update_input_class()
 
-    @$input =$ "<input type='hidden' name='#{ @name }' value='#{ @_valueSafe() }' id='#{ @name }' />"
-    @$el.append @$input
 
   _add_image: ->
     @$image =$ "<a href='' target='_blank' class='image'><img src='' /></a>"
@@ -41,8 +45,6 @@ class @InputLoftImage extends InputString
     @$removeBtn =$ "<a href='#' class='remove'>Remove</a>"
     @$el.append @$removeBtn
 
-    @_update_remove_button()
-
     @$removeBtn.on 'click', (e) =>
       e.preventDefault()
       if confirm('Are you sure?')
@@ -56,12 +58,12 @@ class @InputLoftImage extends InputString
 
 
   _update_choose_button_title: ->
-    title = if @value == '' then 'Choose' else 'Update'
+    title = if @value == '' then 'Choose or upload' else 'Choose other or upload'
     @$chooseBtn.html(title)
 
 
-  _update_remove_button: ->
-    if @value == '' then @$removeBtn.hide() else @$removeBtn.show()
+  _update_input_class: ->
+    if @value == '' then @$el.removeClass('has-value') else @$el.addClass('has-value')
 
 
   #
@@ -73,7 +75,7 @@ class @InputLoftImage extends InputString
 
     @_update_image()
     @_update_choose_button_title()
-    @_update_remove_button()
+    @_update_input_class()
 
 
 _chrFormInputs['loft-image'] = InputLoftImage
