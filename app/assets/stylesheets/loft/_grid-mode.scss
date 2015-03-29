@@ -1,7 +1,21 @@
+@mixin iconLabel($title) {
+  &:before {
+    display: block;
+    content: $title;
+    color: $contrastColor;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 8px;
+    font-size: 1.5em;
+    margin-top: 2.75em;
+  }
+}
+
 .module.assets.grid-mode {
   .list:not(:first-child) .items {
-    padding: .25em .75em .5em;
-    .item.asset { margin: 0 .75em 1.5em; float: left; }
+    padding: .25em .75em 5em;
+    .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }
 
     .item.asset {
       width: 222px; height: 222px;
@@ -24,7 +38,8 @@
       .asset-icon {
         @include absolutePosition(10px inherit inherit 10px);
         width: 200px; height: 150px; margin-right: 0;
-        background: $white; box-shadow: 0 0 1px rgba(0,0,0,0.2) inset;
+        background: $white;
+        &:after { @include absolutePosition(0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
 
         img { display: block; width: 100%; }
       }
@@ -38,5 +53,12 @@
         .asset-name { display: block; @include absolutePosition(inherit inherit 27px 8px); width: 92%; }
       }
     }
+
+    // asset type labels
+    .asset-text    .asset-icon { @include iconLabel('Text');    }
+    .asset-archive .asset-icon { @include iconLabel('Archive'); }
+    .asset-audio   .asset-icon { @include iconLabel('Audio');   }
+    .asset-video   .asset-icon { @include iconLabel('Video');   }
+    .asset-other   .asset-icon { @include iconLabel('File');    }
   }
 }

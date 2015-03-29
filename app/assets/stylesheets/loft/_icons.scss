@@ -50,7 +50,7 @@
 .item.asset {
   .asset-icon {
     @include asset-icon-base();
-    display: inline-block; margin-right: 1em;
+    display: inline-block; margin-right: 1em; &:focus { outline: none; }
   }
   &.asset-image   .asset-icon { background-position:  0px -16px; }
   &.asset-text    .asset-icon { background-position:  0px -32px; }

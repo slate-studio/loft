@@ -27,6 +27,7 @@
     display: inline;
     position: relative; top: -.25em;
     margin-right: 1em;
+    input:focus { outline: none; }
   }
   &.edit-name {
     .asset-name { display: block; }
