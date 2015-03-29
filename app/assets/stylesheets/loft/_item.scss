@@ -43,7 +43,7 @@
       .items {
         .item { min-height: 49px; }
         .item-title    { display: inline-block; }
-        .item-subtitle { display: inline; float: right; }
+        .item-subtitle { @include absolutePosition(1.3em 1em inherit inherit); }
         .item.has-subtitle { padding: 1em; }
         img { display: none; } // show thumbnail only in .grid-mode
       }

@@ -13,8 +13,9 @@
 }
 
 .module.assets.grid-mode {
+
   .list:not(:first-child) .items {
-    padding: .25em .75em 5em;
+    padding: .25em .25em 5em .75em;
     .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }
 
     .item.asset {
@@ -46,7 +47,7 @@
 
       // title and subtitle
       .item-title { display: block; margin-top: 10.8em; }
-      .item-subtitle { display: block; float: none; margin-top: .3em; }
+      .item-subtitle { display: block; position: initial; margin-top: .3em; }
 
       // asset name input
       &.edit-name {

@@ -79,10 +79,6 @@ class @Loft
 
 
   _inititialize_list: (list) ->
-    # uploading spinner
-    list.$loading =$ "<div class='loader'></div>"
-    list.$el.append list.$loading
-
     # file input button for uploading new files
     list.$uploadInput =$ "<input class='asset-upload' type='file' multiple='multiple' />"
     list.$search.before list.$uploadInput
@@ -95,6 +91,11 @@ class @Loft
 
     # group actions toolbar
     list.groupActions = new LoftGroupActions(list, this)
+
+    # grid/list checkbox
+    list.$switchMode =$ "<a class='assets-switch-mode' href='#'></a>"
+    list.$backBtn.after list.$switchMode
+    list.$switchMode.on 'click', (e) => e.preventDefault() ; @module.$el.toggleClass('grid-mode')
 
 
   _upload: (file, list) ->

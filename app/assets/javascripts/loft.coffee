@@ -6,5 +6,4 @@
 #= require chr/form/input-loft-image
 
 # TODOs:
-# - add grid mode
 # - refactor group remove action
