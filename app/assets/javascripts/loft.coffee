@@ -7,3 +7,4 @@
 
 # TODOs:
 # - add grid mode
+# - refactor group remove action

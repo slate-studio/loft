@@ -54,9 +54,9 @@ module Mongoid
       end
 
 
-      def list_item_thumbnail
+      def grid_item_thumbnail
         if is_image? and file?
-          file.small_150.url
+          file._200x150_2x.url
         else
           ''
         end

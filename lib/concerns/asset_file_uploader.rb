@@ -9,8 +9,8 @@ module Loft
         "loft/#{ model._number }"
       end
 
-      version :small_150, if: :is_image? do
-        process :resize_to_fill => [150, 150]
+      version :_200x150_2x, if: :is_image? do
+        process :resize_to_fill => [400, 300]
       end
 
       def is_image? new_file

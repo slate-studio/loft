@@ -25,9 +25,17 @@ class @LoftAssetItem extends Item
     @$link =$ "<a class='asset-icon' href='#{ @object.file.url }' target='_blank'></a>"
     @$el.prepend(@$link)
 
+    # thumbnail for images
+    if @object.type == 'image' && @object.grid_item_thumbnail != ''
+      @$thumbnail =$ "<img src='#{ @object.grid_item_thumbnail }' />"
+      @$link.append @$thumbnail
+
     # checkbox for item selection
-    @$checkbox =$ "<input class='asset-checkbox' type='checkbox' />"
+    @$checkbox      =$ "<div class='asset-checkbox'></div>"
+    @$checkboxInput =$ "<input type='checkbox' />"
+    @$checkbox.append(@$checkboxInput)
     @$el.prepend(@$checkbox)
+
 
     # input for assets name
     name = @$el.attr('data-title')

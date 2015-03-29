@@ -3,8 +3,9 @@
 // admin.scss (default)
 //
 // - mobile version for assets list
-//
+// - mobile version for assets grid mode
 
+@import "loft/grid-mode";
 @import "loft/group-actions";
 @import "loft/icons";
 @import "loft/item";

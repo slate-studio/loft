@@ -24,6 +24,7 @@
     }
   }
   .asset-checkbox {
+    display: inline;
     position: relative; top: -.25em;
     margin-right: 1em;
   }
@@ -43,6 +44,7 @@
         .item-title    { display: inline-block; }
         .item-subtitle { display: inline; float: right; }
         .item.has-subtitle { padding: 1em; }
+        img { display: none; } // show thumbnail only in .grid-mode
       }
     }
   }

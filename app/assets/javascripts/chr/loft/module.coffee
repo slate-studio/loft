@@ -51,6 +51,9 @@ class @Loft
     @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
     @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
 
+    # grid mode
+    @module.$el.addClass('grid-mode')
+
 
   _nested_list_config: (moduleName, assetType) ->
     arrayStoreConfig =
