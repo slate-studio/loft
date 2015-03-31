@@ -54,11 +54,11 @@ module Mongoid
       end
 
 
-      def grid_item_thumbnail
+      def item_thumbnail
         if is_image? and file?
-          file._200x150_2x.url
+          { medium: file._200x150_2x.url, small: file._40x40_2x.url }
         else
-          ''
+          {}
         end
       end
 

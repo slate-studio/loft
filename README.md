@@ -25,7 +25,7 @@ Add controller for asset model to make it accesible via CMS, e.g. ```app/control
 class Admin::AssetsController < Admin::BaseController
   mongosteen
   has_scope :by_type
-  json_config({ methods: [ :grid_item_thumbnail, :created_ago ] })
+  json_config({ methods: [ :item_thumbnail, :created_ago ] })
 end
 ```
 

@@ -27,8 +27,10 @@ class @LoftAssetItem extends Item
 
     # thumbnail for images
     if @object.type == 'image' && @object.grid_item_thumbnail != ''
-      @$thumbnail =$ "<img src='#{ @object.grid_item_thumbnail }' />"
-      @$link.append @$thumbnail
+      @$thumbnailSmall  =$ "<img class='asset-thumbnail-small'  src='#{ @object.item_thumbnail.small  }' />"
+      @$thumbnailMedium =$ "<img class='asset-thumbnail-medium' src='#{ @object.item_thumbnail.medium }' />"
+      @$link.append @$thumbnailSmall
+      @$link.append @$thumbnailMedium
 
     # checkbox for item selection
     @$checkbox      =$ "<div class='asset-checkbox'></div>"

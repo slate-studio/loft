@@ -13,6 +13,10 @@ module Loft
         process :resize_to_fill => [400, 300]
       end
 
+      version :_40x40_2x, if: :is_image? do
+        process :resize_to_fill => [80, 80]
+      end
+
       def is_image? new_file
         model.is_image?
       end
