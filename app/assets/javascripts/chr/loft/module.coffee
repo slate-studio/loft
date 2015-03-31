@@ -8,8 +8,12 @@
 
 # -----------------------------------------------------------------------------
 # Loft
-# TODO:
-#  - back to root list
+#
+# public methods:
+#   new Loft(title, @resource, @resourcePath)
+#   showModal(assetType, @selectMultipleAssets, @onAcceptCallback)
+#   closeModal()
+#
 # -----------------------------------------------------------------------------
 class @Loft
   constructor: (title, @resource, @resourcePath) ->
@@ -51,8 +55,9 @@ class @Loft
     @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
     @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
 
-    # grid mode
-    @module.$el.addClass('grid-mode')
+    # enable grid mode as default on desktop/tablet
+    if ! _isMobile()
+      @module.$el.addClass('grid-mode')
 
 
   _nested_list_config: (moduleName, assetType) ->

@@ -39,8 +39,10 @@ class @LoftAssetItem extends Item
 
     # input for assets name
     name = @$el.attr('data-title')
-    @$nameInput =$ "<input class='asset-name' type='text' value='#{ name }' />"
-    @$title.before @$nameInput
+    @$name      =$ "<div class='asset-name'></div>"
+    @$nameInput =$ "<input type='text' value='#{ name }' />"
+    @$name.append @$nameInput
+    @$title.before @$name
     @_bind_name_input()
 
     # handler for asset name change on title click

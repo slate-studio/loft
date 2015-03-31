@@ -1,0 +1,235 @@
+
+// MIXINS
+
+@mixin iconBase($bgSize, $width, $height) {
+  background-image: image-url('loft/library@3x.png'); background-size: $bgSize;
+  display: block; width: $width; height: $height;
+}
+
+@mixin iconLabel($title) {
+  &:before {
+    display: block;
+    content: $title;
+    color: $contrastColor;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 8px;
+    font-size: 1.5em;
+    margin-top: 2.6em;
+  }
+}
+
+@mixin noFocus() { &:focus { outline: none; } }
+
+
+// ASSET TYPE ICONS
+
+.module.assets .list:first-child .items {
+  .item {
+    .item-title { margin-left: 2.05em; }
+    &:before    { @include absolutePosition(inherit inherit inherit 1em); content: ''; display: block; }
+  }
+
+  .item {
+    &:before         {    @include iconBase(32px 112px, 16px, 16px); }
+    &.active:before  {    background-position: 16px   0px; }
+  }
+  .item:nth-child(2) {
+    &:before            { background-position:  0px -16px; }
+    &.active { &:before { background-position: 16px -16px; } }
+  }
+  .item:nth-child(3) {
+    &:before            { background-position:  0px -32px; }
+    &.active { &:before { background-position: 16px -32px; } }
+  }
+  .item:nth-child(4) {
+    &:before            { background-position:  0px -48px; }
+    &.active { &:before { background-position: 16px -48px; } }
+  }
+  .item:nth-child(5) {
+    &:before            { background-position:  0px -64px; }
+    &.active { &:before { background-position: 16px -64px; } }
+  }
+  .item:nth-child(6) {
+    &:before            { background-position:  0px -80px; }
+    &.active { &:before { background-position: 16px -80px; } }
+  }
+  .item:nth-child(7) {
+    &:before            { background-position:  0px -96px; }
+    &.active { &:before { background-position: 16px -96px; } }
+  }
+}
+
+
+// LIST MODE
+
+.module.assets .list:not(:first-child) .items .item.asset {
+  padding-left: 6.25em; // 100px;
+
+  // checkbox
+  .asset-checkbox {
+    @include absolutePosition(1.3em inherit inherit 1em); z-index: 1;
+    input { @include absolutePosition(0px inherit inherit 0px); }
+  }
+
+  // type icon
+  .asset-icon {
+    @include iconBase(64px 224px, 32px, 32px);
+    @include absolutePosition(12px inherit inherit 3.05em);
+  }
+
+  // image thumbnail
+  &.asset-image .asset-icon {
+    @include absolutePosition(8px inherit inherit 2.8em);
+    overflow: hidden; width: 40px; height: 40px; border-radius: 20px;
+    img { height: 100%; }
+  }
+
+  &.asset-image   .asset-icon { background-position:  0px  -32px; }
+  &.asset-text    .asset-icon { background-position:  0px  -64px; }
+  &.asset-archive .asset-icon { background-position:  0px  -96px; }
+  &.asset-audio   .asset-icon { background-position:  0px -128px; }
+  &.asset-video   .asset-icon { background-position:  0px -160px; }
+  &.asset-other   .asset-icon { background-position:  0px -192px; }
+
+  // name
+  .item-title { cursor: pointer; }
+  .asset-name {
+    display: none; z-index: 1;
+    @include absolutePosition(7px 1em inherit 94px);
+    input { width: 100%; padding: .1em .3em .3em .3em; @include noFocus();
+            border: 1px solid $stableColor; box-shadow: 0 0 10px $lightColor; border-radius: 3px; }
+  }
+  &.edit-name .asset-name { display: block; }
+}
+
+
+// LIST-GRID MODE SWITCHER
+
+.assets-switch-mode { display: none; }
+
+
+/* Tablet Layout */
+
+@media #{ $tablet } {
+  .module.assets .list:not(:first-child) .items { font-size: 1em; }
+  .module.assets .list:not(:first-child) .items .item.asset {
+    padding-top: 19px; padding-bottom: 19px;
+    .item-title {
+      display: inline; cursor: pointer;
+      &:hover { color: $positiveColor; text-decoration: underline; }
+    }
+    .item-subtitle { @include absolutePosition(1.55em 1em inherit inherit); }
+    .asset-name { top: 16px; }
+  }
+
+  // GRID MODE
+
+  .assets-switch-mode {
+    display: inline;
+    @include absolutePosition(inherit inherit inherit 1em);
+    &:after { content: 'Show as Grid'; color: $stableColor; }
+  }
+  .module.assets.grid-mode .assets-switch-mode:after { content: 'Show as List'; }
+
+
+  .module.assets.grid-mode {
+    .list:not(:first-child) .items {
+      padding: .25em .25em 5em .75em;
+      .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }
+
+      .item.asset {
+        padding-left: 1em; width: 222px; height: 222px;
+        &:after { display: none; } border: 1px solid $contrastColor; border-radius: 4px;
+
+        // checkbox: position + decoration
+        .asset-checkbox {
+          top: 10px; left: 10px; width: 24px; height: 24px; background: $white;
+          box-shadow: 0 1px 0 rgba(0,0,0,0.05),1px 0 0 rgba(0,0,0,0.05); border-bottom-right-radius: 4px;
+        }
+
+        // thumbnail
+        .asset-icon {
+          @include absolutePosition(10px inherit inherit 10px);
+          width: 200px; height: 150px; background: $white; border-radius: 0;
+          &:after { @include absolutePosition(0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
+        }
+
+        // name & subtitle
+        .item-title { display: block; margin-top: 9.4em; }
+        .item-subtitle { display: block; position: initial; margin-top: .3em; }
+        &.edit-name .asset-name { top: inherit; bottom: 28px; left: 10px; right: 10px; }
+      }
+
+      // asset type labels
+      .asset-text    .asset-icon { @include iconLabel('Text');    }
+      .asset-archive .asset-icon { @include iconLabel('Archive'); }
+      .asset-audio   .asset-icon { @include iconLabel('Audio');   }
+      .asset-video   .asset-icon { @include iconLabel('Video');   }
+      .asset-other   .asset-icon { @include iconLabel('File');    }
+    }
+  }
+}
+
+
+
+
+
+// .item.asset {
+
+  // .asset-checkbox {
+  //   display: inline;
+  //   position: relative; top: -.25em;
+  //   margin-right: 1em;
+  //   input:focus { outline: none; }
+  // }
+
+//   .item-title {
+//     cursor: pointer;
+//     position: relative;
+//     &:hover { color: $positiveColor; text-decoration: underline; }
+//   }
+
+//   .asset-name {
+//     display: none;
+//     width: 50%;
+//     position: absolute;
+//     line-height: 1;
+//     padding: 0em .3em .3em .375em;
+//     top: .55em; bottom: .55em; left: 4.5em;
+//     z-index: 1;
+//     border-radius: 3px;
+//     &:focus {
+//       outline: none !important;
+//       border: 1px solid $stableColor;
+//       box-shadow: 0 0 10px $lightColor;
+//     }
+//   }
+//   .asset-checkbox {
+//     display: inline;
+//     position: relative; top: -.25em;
+//     margin-right: 1em;
+//     input:focus { outline: none; }
+//   }
+//   &.edit-name {
+//     .asset-name { display: block; }
+//   }
+// }
+
+
+/* Tablet Layout */
+
+// @media #{ $tablet } {
+//   .module.assets {
+//     .list:not(:first-child) {
+//       .items {
+//         .item { min-height: 49px; }
+//         .item-title    { display: inline-block; }
+//         .item-subtitle { @include absolutePosition(1.3em 1em inherit inherit); }
+//         .item.has-subtitle { padding: 1em; }
+//         img { display: none; } // show thumbnail only in .grid-mode
+//       }
+//     }
+//   }
+// }
