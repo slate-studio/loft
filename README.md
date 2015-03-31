@@ -2,6 +2,7 @@
 
 *Media assets manager for [Character CMS](https://github.com/slate-studio/chr).*
 
+
 ### Installation
 
 Add to ```Gemfile```:
@@ -54,9 +55,11 @@ assets: new Loft('Library', 'asset', '/admin/assets')
 - [Mongosteen](https://github.com/slate-studio/mongosteen): An easy way to add restful actions for mongoid models
 - [Inverter](https://github.com/slate-studio/inverter): An easy way to connect Rails templates content to CMS
 
+
 ## License
 
 Copyright © 2015 [Slate Studio, LLC](http://slatestudio.com). Loft is free software, and may be redistributed under the terms specified in the [license](LICENSE.md).
+
 
 ## About Slate Studio
 
