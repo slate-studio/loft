@@ -10,10 +10,13 @@
 # INPUT LOFT IMAGE
 # -----------------------------------------------------------------------------
 class @InputLoftImage extends InputString
-  _addInput: ->
+
+  # PRIVATE ===============================================
+
+  _add_input: ->
     @config.placeholder ?= 'Image url'
 
-    @$input =$ "<input type='string' name='#{ @name }' value='#{ @_valueSafe() }' id='#{ @name }' />"
+    @$input =$ "<input type='string' name='#{ @name }' value='#{ @_safe_value() }' id='#{ @name }' />"
     @$el.append @$input
     @$input.on 'change', (e) =>
       @updateValue($(e.target).val())
@@ -68,9 +71,7 @@ class @InputLoftImage extends InputString
     if @value == '' then @$el.removeClass('has-value') else @$el.addClass('has-value')
 
 
-  #
-  # PUBLIC
-  #
+  # PUBLIC ================================================
 
   updateValue: (@value) ->
     @$input.val(@value)
@@ -80,7 +81,7 @@ class @InputLoftImage extends InputString
     @_update_input_class()
 
 
-_chrFormInputs['loft-image'] = InputLoftImage
+chr.formInputs['loft-image'] = InputLoftImage
 
 
 

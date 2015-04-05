@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Kravets <alex@slatestudio.com>,
-#         Slate Studio (http://www.slatestudio.com)
+#  Slate Studio (http://www.slatestudio.com)
 #
 # Coding Guide:
 #   https://github.com/thoughtbot/guides/tree/master/style/coffeescript
@@ -14,11 +14,10 @@ class @LoftTypeItem extends Item
     if @.$el.hasClass('active') then e.preventDefault() ; return
 
     if ! @module.$el.hasClass 'module-modal'
-      window._skipHashchange = true
+      hash = $(e.currentTarget).attr('href')
+      chr.updateHash(hash, true)
 
-      location.hash = $(e.currentTarget).attr('href')
-      crumbs        = location.href.split('/')
-
+      crumbs = hash.split('/')
       @module.showNestedList(_last(crumbs), true)
 
     else

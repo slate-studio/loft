@@ -1,9 +1,10 @@
-#= require chr/loft/group-actions
-#= require chr/loft/asset-item
-#= require chr/loft/type-item
-#= require chr/loft/module
-#= require chr/redactor/loft
-#= require chr/form/input-loft-image
+#= require loft/group-actions
+#= require loft/asset-item
+#= require loft/type-item
+#= require loft/module
+
+#= require redactor-loft
+#= require input-loft-image
 
 # TODOs:
 # - refactor group remove action

@@ -9,7 +9,7 @@
 # -----------------------------------------------------------------------------
 # Loft
 #
-# public methods:
+# Public methods:
 #   new Loft(title, @resource, @resourcePath)
 #   showModal(assetType, @selectMultipleAssets, @onAcceptCallback)
 #   closeModal()
@@ -56,7 +56,7 @@ class @Loft
     @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
 
     # enable grid mode as default on desktop/tablet
-    if ! _isMobile()
+    if ! chr.isMobile()
       @module.$el.addClass('grid-mode')
 
 

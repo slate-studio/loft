@@ -10,7 +10,7 @@
 # Redactor.js Loft Plugin
 # -----------------------------------------------------------------------------
 
-if ! RedactorPlugins then @RedactorPlugins = {}
+if ! @RedactorPlugins then @RedactorPlugins = {}
 
 RedactorPlugins.loft = ->
   methods =

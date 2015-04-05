@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.email       = 'alex@slatestudio.com'
   s.license     = 'MIT'
   s.homepage    = 'http://slatestudio.com'
-  s.summary     = 'Character CMS media assets plugin.'
+  s.summary     = 'Media assets manager for Character CMS'
   s.description = <<-DESC
-This Character CMS plugin adds an assets library that provides an
-easy way to upload, manage and insert files into documents.
+This plugin adds an assets library that provides an easy way
+to upload, manage and insert files into documents.
   DESC
 
   s.rubyforge_project = 'loft'
