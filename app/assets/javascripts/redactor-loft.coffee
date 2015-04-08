@@ -23,13 +23,13 @@ RedactorPlugins.loft = ->
 
 
     showImagesModal: ->
-      chr.modules.assets.showModal 'images', true, (objects) => @loft.insertImages(objects)
+      chr.modules.loft.showModal 'images', true, (objects) => @loft.insertImages(objects)
 
 
     # allow multiple assets when no text is selected
     showAllModal: ->
       multipleAssets = this.selection.getText() == ''
-      chr.modules.assets.showModal 'all', multipleAssets, (objects) => @loft.insertFiles(objects)
+      chr.modules.loft.showModal 'all', multipleAssets, (objects) => @loft.insertFiles(objects)
 
 
     # if text is selected replace text with <a>{{ text }}</a>

@@ -45,7 +45,7 @@ Add to ```admin.scss```:
 Add to ```admin.coffee``` character configuration object:
 
 ```coffee
-assets: new Loft('Library', 'asset', '/admin/assets')
+loft: new Loft('Files', 'asset', '/admin/assets')
 ```
 
 

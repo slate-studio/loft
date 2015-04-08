@@ -34,15 +34,14 @@ class @Loft
     moduleConfig =
       title:                title
       showNestedListsAside: true
-      itemClass:            LoftTypeItem
       items:
-        assets_all:      @_nested_list_config 'All'
-        assets_images:   @_nested_list_config 'Images',   'image'
-        assets_text:     @_nested_list_config 'Text',     'text'
-        assets_archives: @_nested_list_config 'Archives', 'archive'
-        assets_audio:    @_nested_list_config 'Audio',    'audio'
-        assets_video:    @_nested_list_config 'Video',    'video'
-        assets_other:    @_nested_list_config 'Other',    'other'
+        loft_all:      @_nested_list_config 'All'
+        loft_images:   @_nested_list_config 'Images',   'image'
+        loft_text:     @_nested_list_config 'Text',     'text'
+        loft_archives: @_nested_list_config 'Archives', 'archive'
+        loft_audio:    @_nested_list_config 'Audio',    'audio'
+        loft_video:    @_nested_list_config 'Video',    'video'
+        loft_other:    @_nested_list_config 'Other',    'other'
 
       onModuleInit: (module) =>
         @_initialize_module(module)
@@ -54,7 +53,7 @@ class @Loft
 
   _initialize_module: (module) ->
     @module = module
-    @store  = @module.nestedLists.assets_all.config.arrayStore
+    @store  = @module.nestedLists.loft_all.config.arrayStore
 
     # API method
     @module.showModal = (assetType, selectMultipleAssets, callback) =>
@@ -65,6 +64,21 @@ class @Loft
     @module.rootList.$modalCloseBtn =$ "<a href='#' class='modal-close'>Cancel</a>"
     @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
     @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
+
+    # modal types navigation
+    @module.rootList.$items.on 'click', 'a', (e) =>
+      if @module.$el.hasClass 'module-modal'
+        e.preventDefault()
+
+        $item    = $(e.currentTarget)
+        listName = $item.attr('href').split('/')[2]
+
+        @module.activeList.hide()
+        @module.showList(listName)
+        @module.activeList.updateItems()
+
+        $item.parent().children('.active').removeClass('active')
+        $item.addClass('active')
 
     # enable grid mode as default on desktop/tablet
     if ! chr.isMobile()
@@ -82,6 +96,7 @@ class @Loft
       title:              moduleName
       itemTitleField:     'name'
       itemSubtitleField:  'created_ago'
+      showWithParent:     true
       itemClass:          LoftAssetItem
       arrayStore:         new @arrayStoreClass(storeConfig)
       onListInit: (list) => @_inititialize_list(list)
@@ -109,6 +124,12 @@ class @Loft
     list.$backBtn.after list.$switchMode
     list.$switchMode.on 'click', (e) => e.preventDefault() ; @module.$el.toggleClass('grid-mode')
 
+    # modal back for mobiles
+    list.$header.on 'click', '.back', (e) =>
+      if @module.$el.hasClass 'module-modal'
+        e.preventDefault()
+        @module.showList()
+
 
   _upload: (file, list) ->
     obj = {}
@@ -132,11 +153,10 @@ class @Loft
     if @_uploadsCounter == 0
       @module.$el.removeClass('assets-uploading')
 
-      # update data in list if it's not assets_all,
-      # in assets_all new objects are added automatically
-      visibleList = @module.visibleNestedListShownWithParent()
-      if visibleList.name != 'assets_all'
-        visibleList.updateItems()
+      # update data in list if it's not loft_all,
+      # in loft_all new objects are added automatically
+      if @module.activeList.name != 'loft_all'
+        @module.activeList.updateItems()
 
 
   _clear_assets_selection: ->
@@ -158,13 +178,14 @@ class @Loft
   showModal: (assetType='all', @selectMultipleAssets=false, @onAcceptCallback=$.noop) ->
     # modal mode
     @module.$el.addClass('module-modal')
-    # show nested list
-    @module.showNestedList("assets_#{ assetType }")
-    # select active item
-    @module.rootList.$items.children().removeClass('active')
-    @module.rootList.$items.children("[href='#/assets/assets_#{ assetType }']").addClass('active')
     # show module
     @module.show()
+    # show nested list
+    @module.showList("loft_#{ assetType }")
+    @module.activeList.updateItems()
+    # select active item
+    @module.rootList.$items.children().removeClass('active')
+    @module.rootList.$items.children("[href='#/loft/loft_#{ assetType }']").addClass('active')
 
 
 

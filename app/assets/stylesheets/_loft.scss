@@ -24,7 +24,7 @@
 
 // ASSET TYPE ICONS
 
-.module.assets .list:first-child .items {
+.loft .list:first-child .items {
   .item {
     .item-title { margin-left: 2.05em; }
     &:before    { @include absolutePosition(inherit inherit inherit 1em); content: ''; display: block; }
@@ -63,7 +63,7 @@
 
 // LIST MODE
 
-.module.assets .list:not(:first-child) .items .item.asset {
+.loft .list:not(:first-child) .items .item.asset {
   padding-left: 6.25em; // 100px;
 
   // checkbox
@@ -136,12 +136,12 @@
 
 .list header .asset-upload + .search { @include absolutePosition(0 40px inherit inherit); }
 .list.list-search header .asset-upload + .search { @include absolutePosition(0 0 inherit 0); }
-.module.assets.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
+.loft.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
 
 
 // MODAL MODE
 
-.module.assets {
+.loft {
   .modal-close {
     display: none;
     @include headerButton();
@@ -167,10 +167,12 @@
 /* TABLET LAYOUT */
 
 @media #{ $tablet } {
-  .module.assets .list:not(:first-child) .items { font-size: 1em; }
+  // BACK
+  .loft .list:not(:first-child) header .back { display: none; }
 
-  // ITEM
-  .module.assets .list:not(:first-child) .items .item.asset {
+  // ITEMS
+  .loft .list:not(:first-child) .items { font-size: 1em; }
+  .loft .list:not(:first-child) .items .item.asset {
     padding-top: 19px; padding-bottom: 19px;
     .item-title {
       display: inline; cursor: pointer;
@@ -181,7 +183,7 @@
   }
 
   // MODAL MODE
-  .module.assets.module-modal { @include absolutePosition(1.5em 1.5em 0em 1.5em) }
+  .loft.module-modal { @include absolutePosition(1.5em 1.5em 0em 1.5em) }
 
 
   // GRID MODE
@@ -192,12 +194,12 @@
     &:before { content: 'Grid'; color: $lightColor; margin-right: .25em; }
     &:after  { content: 'List'; color: $stableColor; }
   }
-  .module.assets.grid-mode .assets-switch-mode {
+  .loft.grid-mode .assets-switch-mode {
     &:before { color: $stableColor; }
     &:after  { color: $lightColor;  }
   }
 
-  .module.assets.grid-mode {
+  .loft.grid-mode {
     .list:not(:first-child) .items {
       padding: .25em .25em 5em .75em;
       .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }

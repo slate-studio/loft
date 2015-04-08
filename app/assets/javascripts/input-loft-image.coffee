@@ -41,7 +41,7 @@ class @InputLoftImage extends InputString
 
     @$chooseBtn.on 'click', (e) =>
       e.preventDefault()
-      chr.modules.assets.showModal 'images', false, (objects) =>
+      chr.modules.loft.showModal 'images', false, (objects) =>
         asset = objects[0]
         @updateValue(asset.file.url)
 
