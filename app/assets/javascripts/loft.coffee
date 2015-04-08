@@ -7,4 +7,4 @@
 #= require input-loft-image
 
 # TODOs:
-# - refactor group remove action
+# - refactor group remove action: delet a bunch first then reload the page

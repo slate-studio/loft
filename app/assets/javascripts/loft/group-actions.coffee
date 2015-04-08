@@ -15,6 +15,8 @@ class @LoftGroupActions
     @_bind_checkboxes()
 
 
+  # PRIVATE ===============================================
+
   _render: ->
     @$el =$ "<div class='assets-group-actions' style='display:none;'></div>"
     @list.$header.append @$el
@@ -94,6 +96,8 @@ class @LoftGroupActions
   _show: ->
     @$el.show()
 
+
+  # PUBLIC ================================================
 
   hide: ->
     @$el.hide()

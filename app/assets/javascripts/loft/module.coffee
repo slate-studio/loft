@@ -8,17 +8,26 @@
 
 # -----------------------------------------------------------------------------
 # Loft
+# -----------------------------------------------------------------------------
 #
 # Public methods:
-#   new Loft(title, @resource, @resourcePath)
+#   new Loft(title, resource, resourcePath, @arrayStoreClass, @arrayStoreConfig)
 #   showModal(assetType, @selectMultipleAssets, @onAcceptCallback)
 #   closeModal()
 #
 # -----------------------------------------------------------------------------
 class @Loft
-  constructor: (title, @resource, @resourcePath) ->
+  constructor: (title, resource, resourcePath, @arrayStoreClass, @arrayStoreConfig) ->
     @module = {}
     @store  = {}
+
+    @arrayStoreClass  ?= RailsArrayStore
+    @arrayStoreConfig ?=
+      resource:    resource
+      path:        resourcePath
+      sortBy:      'created_at'
+      sortReverse: true
+      searchable:  true
 
     @_uploadsCounter = 0
 
@@ -41,6 +50,8 @@ class @Loft
     return moduleConfig
 
 
+  # PRIVATE ===============================================
+
   _initialize_module: (module) ->
     @module = module
     @store  = @module.nestedLists.assets_all.config.arrayStore
@@ -61,22 +72,18 @@ class @Loft
 
 
   _nested_list_config: (moduleName, assetType) ->
-    arrayStoreConfig =
-      resource:    @resource
-      path:        @resourcePath
-      searchable:  true
-      sortBy:      'created_at'
-      sortReverse: true
+    storeConfig = {}
+    $.extend(storeConfig, @arrayStoreConfig)
 
     if assetType
-      $.extend(arrayStoreConfig, { urlParams: { by_type:  assetType } })
+      $.extend(storeConfig, { urlParams: { by_type:  assetType } })
 
     config =
       title:              moduleName
       itemTitleField:     'name'
       itemSubtitleField:  'created_ago'
       itemClass:          LoftAssetItem
-      arrayStore:         new MongosteenArrayStore(arrayStoreConfig)
+      arrayStore:         new @arrayStoreClass(storeConfig)
       onListInit: (list) => @_inititialize_list(list)
       onListShow: (list) => @_clear_assets_selection()
 
@@ -137,6 +144,8 @@ class @Loft
       list.groupActions.hide()
       list.$items.find('.asset-checkbox').prop('checked', false)
 
+
+  # PUBLIC ================================================
 
   closeModal: ->
     @selectMultipleAssets = true

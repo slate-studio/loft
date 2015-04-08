@@ -10,7 +10,10 @@
 # Loft Asset Item
 # -----------------------------------------------------------------------------
 class @LoftTypeItem extends Item
-  onClick: (e) ->
+
+  # PRIVATE ===============================================
+
+  _click: (e) ->
     if @.$el.hasClass('active') then e.preventDefault() ; return
 
     if ! @module.$el.hasClass 'module-modal'
