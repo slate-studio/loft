@@ -26,7 +26,7 @@
 .loft .list:first-child .items {
   .item {
     .item-title { margin-left: 2.05em; }
-    &:before    { @include absolutePosition(inherit inherit inherit 1em); content: ''; display: block; }
+    &:before    { @include position(absolute, null null null 1em); content: ''; display: block; }
   }
 
   .item {
@@ -67,19 +67,19 @@
 
   // checkbox
   .asset-checkbox {
-    @include absolutePosition(1.3em inherit inherit 1em); z-index: 1;
-    input { @include absolutePosition(0px inherit inherit 0px); }
+    @include position(absolute, 1.3em null null 1em); z-index: 1;
+    input { @include position(absolute, 0px null null 0px); }
   }
 
   // type icon
   .asset-icon {
     @include iconBase(64px 224px, 32px, 32px);
-    @include absolutePosition(12px inherit inherit 3.05em);
+    @include position(absolute, 12px null null 3.05em);
   }
 
   // image thumbnail
   &.asset-image .asset-icon {
-    @include absolutePosition(8px inherit inherit 2.8em);
+    @include position(absolute, 8px null null 2.8em);
     overflow: hidden; width: 40px; height: 40px; border-radius: 20px;
     img { height: 100%; }
   }
@@ -98,8 +98,8 @@
   .item-title { cursor: pointer; }
   .asset-name {
     display: none; z-index: 1;
-    @include absolutePosition(7px .5em inherit 94px);
-    input { width: 100%; padding: .1em .3em .3em .3em; @include noFocus();
+    @include position(absolute, 7px .5em null 94px);
+    input { width: 100%; padding: .1em .3em .3em .3em; @include no-focus-outline;
             border: 1px solid $stableColor; box-shadow: 0 0 10px $lightColor; border-radius: 3px; }
   }
   &.edit-name .asset-name { display: block; }
@@ -114,10 +114,10 @@
 // GROUP ACTIONS
 
 .assets-group-actions {
-  @include absolutePosition(0 0 0 0); background: $white;
-  .accept   { @include headerButton($positiveColor);  float: right; margin-right: 1em; }
-  .delete   { @include headerButton($assertiveColor); float: right; margin-right: 1em; }
-  .unselect { @include headerButton($stableColor);    float: left;  margin-left:  1em; }
+  @include position(absolute, 0 0 0 0); background: $white;
+  .accept   { @include header-button($positiveColor);  float: right; margin-right: 1em; }
+  .delete   { @include header-button($assertiveColor); float: right; margin-right: 1em; }
+  .unselect { @include header-button($stableColor);    float: left;  margin-left:  1em; }
 }
 
 .assets-group-actions .accept { display: none; }
@@ -128,28 +128,24 @@
 // UPLOAD BUTTON
 
 .asset-upload {
-  @include absolutePosition(0 -40px inherit inherit);
-  @extend .icon-plus; @include noFocus;
+  @include position(absolute, 0 -40px null null);
+  @extend .icon-plus; @include no-focus-outline;
   cursor: pointer; padding-left: 80px;
 }
 
-.list header .asset-upload + .search { @include absolutePosition(0 40px inherit inherit); }
-.list.list-search header .asset-upload + .search { @include absolutePosition(0 0 inherit 0); }
+.list header .asset-upload + .search { @include position(absolute, 0 40px null null); }
+.list.list-search header .asset-upload + .search { @include position(absolute, 0 0 null 0); }
 .loft.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
 
 
 // MODAL MODE
 
 .loft {
-  .modal-close {
-    display: none;
-    @include headerButton();
-    @include absolutePosition(null null null 1em );
-  }
+  .modal-close { @include hide(); }
   &.module-modal {
-    @include absolutePosition(.5em .5em 0em .5em); z-index: 1100;
+    @include position(absolute, 0 .5em 0 .5em); z-index: 1100;
 
-    &:after { display: none; }
+    &:after { @include hide(); }
 
     // dark background
     &:before {
@@ -157,18 +153,16 @@
       content: ''; display: block; background: rgba(0,0,0,.25);
     }
 
-    .modal-close { display: inline; }
+    .modal-close { @include header-button(); @include position(absolute, null null null 1em ); }
+    .header { top: 0; left: .5em; right: .5em; width: auto; }
+
     .list:first-child .back { display: none }
   }
 }
 
 
-/* TABLET LAYOUT */
-
-@media #{ $tablet } {
-  // BACK
-  .loft .list:not(:first-child) header .back { display: none; }
-
+/* Tablet ------------------------------------------------------------------ */
+@media #{$tablet} {
   // ITEMS
   .loft .list:not(:first-child) .items { font-size: 1em; }
   .loft .list:not(:first-child) .items .item.asset {
@@ -177,19 +171,19 @@
       display: inline; cursor: pointer;
       &:hover { color: $positiveColor; text-decoration: underline; }
     }
-    .item-subtitle { @include absolutePosition(1.55em 1em inherit inherit); }
+    .item-subtitle { @include position(absolute, 1.55em 1em null null); }
     .asset-name { top: 16px; }
   }
 
   // MODAL MODE
-  .loft.module-modal { @include absolutePosition(1.5em 1.5em 0em 1.5em) }
+  .loft.module-modal { @include position(absolute, 1.5em 1.5em 0em 1.5em) }
+  .loft.module-modal .header { top: 0; left: 0; right: 0; width: auto; }
 
 
   // GRID MODE
   .assets-switch-mode {
-    @include absolutePosition(inherit inherit inherit 1em);
-    display: inline;
-    font-size: .9em;
+    @include position(absolute, null null null 1em);
+    display: inline; font-size: .9em; line-height: 2.9; left: 3em;
     &:before { content: 'Grid'; color: $lightColor; margin-right: .25em; }
     &:after  { content: 'List'; color: $stableColor; }
   }
@@ -205,7 +199,7 @@
 
       .item.asset {
         padding-left: 1em; width: 222px; height: 222px;
-        @include noBorder(); border: 1px solid $contrastColor; border-radius: 4px;
+        @include no-bottom-border; border: 1px solid $contrastColor; border-radius: 4px;
 
         // checkbox: position + decoration
         .asset-checkbox {
@@ -215,9 +209,9 @@
 
         // thumbnail
         .asset-icon {
-          @include absolutePosition(10px inherit inherit 10px);
+          @include position(absolute, 10px null null 10px);
           width: 200px; height: 150px; background: $white; border-radius: 0;
-          &:after { @include absolutePosition(0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
+          &:after { @include position(absolute, 0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
         }
 
         .asset-thumbnail-small  { display: none;  }
@@ -239,6 +233,15 @@
   }
 }
 
+
+/* Desktop ----------------------------------------------------------------- */
+@media #{$desktop} {
+  // BACK
+  .loft .list:not(:first-child) .back { @include hide; }
+
+  // GRID MODE
+  .assets-switch-mode { left: 1em; }
+}
 
 
 
