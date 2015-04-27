@@ -52,7 +52,6 @@ loft: new Loft('Files', 'asset', '/admin/assets')
 ## Notes
 
 1. Check out [kraken.io](https://github.com/kraken-io/kraken-ruby) for image optimization.
-1. Fix an issue with renaming assets.
 
 ## Loft family
 
