@@ -7,6 +7,8 @@ module Mongoid
 
     included do
 
+      include Mongoid::Timestamps
+      include Mongoid::SerializableId
       include Mongoid::Autoinc
       include Mongoid::Search
       include ActionView::Helpers::DateHelper
@@ -54,17 +56,17 @@ module Mongoid
       end
 
 
+      def content_type
+        @content_type ||= file.content_type
+      end
+
+
       def item_thumbnail
-        if is_image? and file?
+        if is_image?
           { medium: file._200x150_2x.url, small: file._40x40_2x.url }
         else
           {}
         end
-      end
-
-
-      def content_type
-        @content_type ||= file.content_type
       end
 
 
@@ -73,10 +75,12 @@ module Mongoid
         content_type.match(/image\//) ? true : false
       end
 
+
       def is_text?
         return false unless file?
         content_type.match(/text\//) ? true : false
       end
+
 
       def is_archive?
         return false unless file?
@@ -84,10 +88,12 @@ module Mongoid
         content_type.match(/zip/) ? true : false
       end
 
+
       def is_audio?
         return false unless file?
         content_type.match(/audio\//) ? true : false
       end
+
 
       def is_video?
         return false unless file?
