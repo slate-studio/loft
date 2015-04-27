@@ -128,7 +128,7 @@ this.LoftAssetItem = (function(superClass) {
     this.path = path;
     this.object = object1;
     this.config = config;
-    this.$el = $("<div class='item asset asset-" + this.object.type + "' data-id='" + this.object._id + "' data-title=''></div>");
+    this.$el = $("<div class='item asset asset-" + this.object.type + "' data-id='" + this.object._id + "'></div>");
     this.render();
   }
 
@@ -199,7 +199,7 @@ this.LoftAssetItem = (function(superClass) {
     this.$checkboxInput = $("<input type='checkbox' />");
     this.$checkbox.append(this.$checkboxInput);
     this.$el.prepend(this.$checkbox);
-    name = this.$el.attr('data-title');
+    name = this.$title.text();
     this.$name = $("<div class='asset-name'></div>");
     this.$nameInput = $("<input type='text' value='" + name + "' />");
     this.$name.append(this.$nameInput);
