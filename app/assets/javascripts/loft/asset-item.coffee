@@ -11,7 +11,7 @@
 # -----------------------------------------------------------------------------
 class @LoftAssetItem extends Item
   constructor: (@module, @path, @object, @config) ->
-    @$el =$ "<div class='item asset asset-#{ @object.type }' data-id='#{ @object._id }' data-title=''></div>"
+    @$el =$ "<div class='item asset asset-#{ @object.type }' data-id='#{ @object._id }'></div>"
     @render()
 
 
@@ -74,7 +74,7 @@ class @LoftAssetItem extends Item
 
 
     # input for assets name
-    name = @$el.attr('data-title')
+    name = @$title.text()
     @$name      =$ "<div class='asset-name'></div>"
     @$nameInput =$ "<input type='text' value='#{ name }' />"
     @$name.append @$nameInput
