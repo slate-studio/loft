@@ -1,0 +1,38 @@
+{
+  "name": "loft",
+  "version": "0.1.4",
+  "homepage": "https://github.com/slate-studio/loft",
+  "authors": [
+    "Slate Studio (http://www.slatestudio.com)"
+  ],
+  "license": "MIT",
+  "description": "Media assets manager for Character CMS.",
+  "main": "app/assets/stylesheets/_loft.scss, dist/loft.js, app/assets/images/loft/library@3x.png",
+  "keywords": [
+    "character",
+    "cms",
+    "gallery",
+    "pugin",
+    "images",
+    "files"
+  ],
+  "ignore": [
+    "**/.*",
+    "lib",
+    "docs",
+    "chr.gemspec",
+    "Gemfile",
+    "Gemfile.lock",
+    "Gruntfile.coffee",
+    "package.json",
+    "Rakefile"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slate-studio/loft.git"
+  },
+  "dependencies": {
+    "bourbon": ">=4.0",
+    "normalize-scss": ">=3.0"
+  }
+}
