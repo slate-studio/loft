@@ -93,12 +93,10 @@ class @Loft
       $.extend(storeConfig, { urlParams: { by_type:  assetType } })
 
     config =
-      title:              moduleName
-      itemTitleField:     'name'
-      itemSubtitleField:  'created_ago'
-      showWithParent:     true
-      itemClass:          LoftAssetItem
-      arrayStore:         new @arrayStoreClass(storeConfig)
+      title:          moduleName
+      showWithParent: true
+      itemClass:      LoftAssetItem
+      arrayStore:     new @arrayStoreClass(storeConfig)
       onListInit: (list) => @_inititialize_list(list)
       onListShow: (list) => @_clear_assets_selection()
 

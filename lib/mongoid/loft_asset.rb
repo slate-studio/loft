@@ -8,9 +8,11 @@ module Mongoid
     included do
 
       include Mongoid::Timestamps
-      include Mongoid::SerializableId
       include Mongoid::Autoinc
       include Mongoid::Search
+
+      include Ants::Id
+
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
@@ -51,22 +53,27 @@ module Mongoid
 
 
       # helpers
-      def created_ago
+      def _list_item_title
+        name
+      end
+
+
+      def _list_item_subtitle
         time_ago_in_words(self.created_at) + " ago"
       end
 
 
-      def content_type
-        @content_type ||= file.content_type
-      end
-
-
-      def item_thumbnail
+      def _list_item_thumbnail
         if is_image?
           { medium: file._200x150_2x.url, small: file._40x40_2x.url }
         else
           {}
         end
+      end
+
+
+      def content_type
+        @content_type ||= file.content_type
       end
 
 

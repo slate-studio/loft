@@ -190,8 +190,8 @@ this.LoftAssetItem = (function(superClass) {
     this.$link = $("<a class='asset-icon' href='" + this.object.file.url + "' target='_blank'></a>");
     this.$el.prepend(this.$link);
     if (this.object.type === 'image' && this.object.grid_item_thumbnail !== '') {
-      this.$thumbnailSmall = $("<img class='asset-thumbnail-small'  src='" + this.object.item_thumbnail.small + "' />");
-      this.$thumbnailMedium = $("<img class='asset-thumbnail-medium' src='" + this.object.item_thumbnail.medium + "' />");
+      this.$thumbnailSmall = $("<img class='asset-thumbnail-small'  src='" + this.object._list_item_thumbnail.small + "' />");
+      this.$thumbnailMedium = $("<img class='asset-thumbnail-medium' src='" + this.object._list_item_thumbnail.medium + "' />");
       this.$link.append(this.$thumbnailSmall);
       this.$link.append(this.$thumbnailMedium);
     }
@@ -307,8 +307,6 @@ this.Loft = (function() {
     }
     config = {
       title: moduleName,
-      itemTitleField: 'name',
-      itemSubtitleField: 'created_ago',
       showWithParent: true,
       itemClass: LoftAssetItem,
       arrayStore: new this.arrayStoreClass(storeConfig),
