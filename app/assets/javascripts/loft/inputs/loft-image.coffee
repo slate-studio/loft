@@ -22,8 +22,7 @@ class @InputLoftImage extends InputString
       @updateValue($(e.target).val())
 
     @_add_image()
-    @_add_choose_button()
-    @_add_remove_button()
+    @_add_actions()
     @_update_input_class()
 
 
@@ -33,9 +32,17 @@ class @InputLoftImage extends InputString
     @_update_image()
 
 
+  _add_actions: ->
+    @$actions =$ "<span class='input-actions'></span>"
+    @$label.append @$actions
+
+    @_add_choose_button()
+    @_add_remove_button()
+
+
   _add_choose_button: ->
-    @$chooseBtn =$ "<a href='#' class='choose'></a><br/>"
-    @$el.append @$chooseBtn
+    @$chooseBtn =$ "<a href='#' class='choose'></a>"
+    @$actions.append @$chooseBtn
 
     @_update_choose_button_title()
 
@@ -48,7 +55,7 @@ class @InputLoftImage extends InputString
 
   _add_remove_button: ->
     @$removeBtn =$ "<a href='#' class='remove'>Remove</a>"
-    @$el.append @$removeBtn
+    @$actions.append @$removeBtn
 
     @$removeBtn.on 'click', (e) =>
       e.preventDefault()
@@ -63,7 +70,7 @@ class @InputLoftImage extends InputString
 
 
   _update_choose_button_title: ->
-    title = if @value == '' then 'Choose or upload' else 'Choose other or upload'
+    title = if @value == '' then 'Choose or upload an image' else 'Choose other or upload'
     @$chooseBtn.html(title)
 
 

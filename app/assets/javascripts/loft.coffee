@@ -3,7 +3,6 @@
 #= require loft/module
 
 #= require loft/redactor-loft
-#= require loft/inputs/loft-asset
 #= require loft/inputs/loft-image
 
 # TODOs:
