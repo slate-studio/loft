@@ -12,7 +12,7 @@
 #
 # Public methods:
 #   new Loft(title, resource, resourcePath, @arrayStoreClass, @arrayStoreConfig)
-#   showModal(assetType, @selectMultipleAssets, @onAcceptCallback)
+#   showModal(assetType, @selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
 #   closeModal()
 #
 # -----------------------------------------------------------------------------
@@ -56,8 +56,8 @@ class @Loft
     @store  = @module.nestedLists.loft_all.config.arrayStore
 
     # API method
-    @module.showModal = (assetType, selectMultipleAssets, callback) =>
-      @showModal(assetType, selectMultipleAssets, callback)
+    @module.showModal = (assetType, selectMultipleAssets, callback, closeOnAccept) =>
+      @showModal(assetType, selectMultipleAssets, callback, closeOnAccept)
     @selectMultipleAssets = true
 
     # modal close button
@@ -173,7 +173,7 @@ class @Loft
 
 
   # chr.modules.assets.showModal()
-  showModal: (assetType='all', @selectMultipleAssets=false, @onAcceptCallback=$.noop) ->
+  showModal: (assetType='all', @selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
     # modal mode
     @module.$el.addClass('module-modal')
     # show module

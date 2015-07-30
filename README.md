@@ -14,8 +14,6 @@ Setup a new model for assets ```asset.rb```:
 ```ruby
 class Asset
   include Mongoid::Document
-  include Mongoid::Timestamps
-  include Mongoid::SerializableId
   include Mongoid::LoftAsset
 end
 ```
@@ -25,8 +23,8 @@ Add controller for asset model to make it accesible via CMS, e.g. ```app/control
 ```ruby
 class Admin::AssetsController < Admin::BaseController
   mongosteen
+
   has_scope :by_type
-  json_config({ methods: [ :item_thumbnail, :created_ago ] })
 end
 ```
 
