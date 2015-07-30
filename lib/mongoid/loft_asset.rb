@@ -16,7 +16,8 @@ module Mongoid
       include ActionView::Helpers::DateHelper
       include ActionView::Helpers::NumberHelper
 
-      # attributes
+
+      ## Attributes
       field :name,           default: ''
       field :filename,       default: ''
       field :size,           type: Integer
@@ -32,27 +33,33 @@ module Mongoid
       field :_number, type: Integer
       increments :_number
 
-      # uploaders
+
+      ## Uploaders
       mount_uploader :file, AssetFileUploader
 
-      # validations
+
+      ## Validations
       validates :file, presence: true
 
-      # search
+
+      ## Search
       search_in :name, :filename
 
-      # scopes
+
+      ## Scopes
       default_scope   -> { desc(:created_at) }
       scope :by_type, -> asset_type { where(type: asset_type) }
 
-      # indexes
+
+      ## Indexes
       index({ created_at: -1 })
 
-      # callbacks
+
+      ## Callbacks
       before_save :update_asset_attributes
 
 
-      # helpers
+      ## Helpers
       def _list_item_title
         name
       end
