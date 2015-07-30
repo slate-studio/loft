@@ -89,6 +89,12 @@ module Mongoid
       end
 
 
+      def is_pdf?
+        return false unless file?
+        content_type.match(/pdf/) ? true : false
+      end
+
+
       def is_archive?
         return false unless file?
         # need to add more archive types: rar, gz, bz2, gzip
@@ -123,6 +129,7 @@ module Mongoid
           # asset types
           self.type = 'image'   if self.is_image?
           self.type = 'text'    if self.is_text?
+          self.type = 'text'    if self.is_pdf?
           self.type = 'archive' if self.is_archive?
           self.type = 'audio'   if self.is_audio?
           self.type = 'video'   if self.is_video?
