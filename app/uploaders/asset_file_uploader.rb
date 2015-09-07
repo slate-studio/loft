@@ -1,7 +1,3 @@
 class AssetFileUploader < CarrierWave::Uploader::Base
-  include Loft::AssetFileUploader
+  include LoftAssetFileUploader
 end
-
-
-
-
