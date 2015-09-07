@@ -6,5 +6,7 @@ require 'mongoid-grid_fs'
 require 'carrierwave/mongoid'
 
 module Loft
-  require 'loft/engine'
+  class Engine < ::Rails::Engine
+    require 'loft/engine'
+  end
 end
