@@ -1,22 +1,22 @@
-//
-// Styles for Loft Character CMS plugin, this should be included in
+// -----------------------------------------------------------------------
+// Basic styles for Loft Character CMS plugin, this should be included in
 // admin.scss (default)
-//
+// -----------------------------------------------------------------------
 
 @import "inputs/loft-image";
 
 // MIXINS
 
-@mixin iconLabel($title) {
+@mixin loft-icon-label($title) {
   &:before {
     display: block; margin-top: 2.6em;
-    content: $title; color: $contrastColor;
+    content: $title; color: rgba($base-font-color, .2);
     font-size: 1.5em; font-weight: 300; letter-spacing: 8px;
     text-align: center; text-transform: uppercase;
   }
 }
 
-@mixin iconBase($bgSize, $width, $height) {
+@mixin loft-icon-base($bgSize, $width, $height) {
   display: block; background-size: $bgSize; width: $width; height: $height;
   background-image: image-url("loft/library@3x.png");
 }
@@ -30,7 +30,7 @@
   }
 
   .item {
-    &:before         {    @include iconBase(32px 112px, 16px, 16px); }
+    &:before         {    @include loft-icon-base(32px 112px, 16px, 16px); }
     &.active:before  {    background-position: 16px   0px; }
   }
   .item:nth-child(2) {
@@ -73,7 +73,7 @@
 
   // type icon
   .asset-icon {
-    @include iconBase(64px 224px, 32px, 32px);
+    @include loft-icon-base(64px 224px, 32px, 32px);
     @include position(absolute, 12px null null 3.05em);
   }
 
@@ -100,7 +100,7 @@
     display: none; z-index: 1;
     @include position(absolute, 7px .5em null 94px);
     input { width: 100%; padding: .1em .3em .3em .3em; @include no-focus-outline;
-            border: 1px solid $stableColor; box-shadow: 0 0 10px $lightColor; border-radius: 3px; }
+            border: 1px solid lighten($base-font-color, 35%); box-shadow: 0 0 10px lighten($base-font-color, 50%); border-radius: 3px; }
   }
   &.edit-name .asset-name { display: block; }
 }
@@ -114,10 +114,10 @@
 // GROUP ACTIONS
 
 .assets-group-actions {
-  @include position(absolute, 0 0 0 0); background: $white;
-  .accept   { @include header-button($positiveColor);  float: right; margin-right: 1em; }
-  .delete   { @include header-button($assertiveColor); float: right; margin-right: 1em; }
-  .unselect { @include header-button($stableColor);    float: left;  margin-left:  1em; }
+  @include position(absolute, 0 0 0 0); background: white;
+  .accept   { color: $positive-color;  float: right; margin-right: 1em; }
+  .delete   { color: $assertive-color; float: right; margin-right: 1em; }
+  .unselect { color: lighten($base-font-color, 35%); float: left; margin-left: 1em; }
 }
 
 .assets-group-actions .accept { display: none; }
@@ -129,8 +129,12 @@
 
 .asset-upload {
   @include position(absolute, 0 -40px null null);
-  @extend .icon-plus; @include no-focus-outline;
-  cursor: pointer; padding-left: 80px;
+  @include icon-plus($positive-color);
+  @include no-focus-outline;
+  cursor       : pointer;
+  padding-left : 80px;
+  &:before { @include position(absolute, null null null 0); }
+  &:hover  { opacity : .5; }
 }
 
 .list header .asset-upload + .search { @include position(absolute, 0 40px null null); }
@@ -141,11 +145,11 @@
 // MODAL MODE
 
 .loft {
-  .modal-close { @include hide(); }
+  .modal-close { display: none; }
   &.module-modal {
     @include position(absolute, 0 .5em 0 .5em); z-index: 1100;
 
-    &:after { @include hide(); }
+    &:after { display: none; }
 
     // dark background
     &:before {
@@ -153,10 +157,10 @@
       content: ''; display: block; background: rgba(0,0,0,.25);
     }
 
-    .modal-close { @include header-button(); @include position(absolute, null null null 1em ); }
+    .modal-close { @include position(absolute, null null null 1em ); display: inline-block; }
     .header { top: 0; left: .5em; right: .5em; width: auto; }
 
-    .list:first-child .back { display: none }
+    .list:first-child .back { display: none; }
   }
 }
 
@@ -169,7 +173,7 @@
     padding-top: 19px; padding-bottom: 19px;
     .item-title {
       display: inline; cursor: pointer;
-      &:hover { color: $positiveColor; text-decoration: underline; }
+      &:hover { color: $positive-color; text-decoration: underline; }
     }
     .item-subtitle { @include position(absolute, 1.55em 1em null null); }
     .asset-name { top: 16px; }
@@ -183,13 +187,13 @@
   // GRID MODE
   .assets-switch-mode {
     @include position(absolute, null null null 1em);
-    display: inline; font-size: .9em; line-height: 2.9; left: 3em;
-    &:before { content: 'Grid'; color: $lightColor; margin-right: .25em; }
-    &:after  { content: 'List'; color: $stableColor; }
+    display: inline; line-height: 2.5; left: 3em;
+    &:before { content: 'Grid'; color: lighten($base-font-color, 50%); margin-right: .25em; }
+    &:after  { content: 'List'; color: lighten($base-font-color, 35%); }
   }
   .loft.grid-mode .assets-switch-mode {
-    &:before { color: $stableColor; }
-    &:after  { color: $lightColor;  }
+    &:before { color: lighten($base-font-color, 35%); }
+    &:after  { color: lighten($base-font-color, 50%);  }
   }
 
   .loft.grid-mode {
@@ -199,18 +203,18 @@
 
       .item.asset {
         padding-left: 1em; width: 222px; height: 222px;
-        @include no-bottom-border; border: 1px solid $contrastColor; border-radius: 4px;
+        @include no-bottom-border; border: 1px solid rgba($base-font-color, .2); border-radius: 4px;
 
         // checkbox: position + decoration
         .asset-checkbox {
-          top: 10px; left: 10px; width: 24px; height: 24px; background: $white;
+          top: 10px; left: 10px; width: 24px; height: 24px; background: white;
           box-shadow: 0 1px 0 rgba(0,0,0,0.05),1px 0 0 rgba(0,0,0,0.05); border-bottom-right-radius: 4px;
         }
 
         // thumbnail
         .asset-icon {
           @include position(absolute, 10px null null 10px);
-          width: 200px; height: 150px; background: $white; border-radius: 0;
+          width: 200px; height: 150px; background: white; border-radius: 0;
           &:after { @include position(absolute, 0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
         }
 
@@ -224,11 +228,11 @@
       }
 
       // asset type labels
-      .asset-text    .asset-icon { @include iconLabel('Text');    }
-      .asset-archive .asset-icon { @include iconLabel('Archive'); }
-      .asset-audio   .asset-icon { @include iconLabel('Audio');   }
-      .asset-video   .asset-icon { @include iconLabel('Video');   }
-      .asset-other   .asset-icon { @include iconLabel('File');    }
+      .asset-text    .asset-icon { @include loft-icon-label('Text');    }
+      .asset-archive .asset-icon { @include loft-icon-label('Archive'); }
+      .asset-audio   .asset-icon { @include loft-icon-label('Audio');   }
+      .asset-video   .asset-icon { @include loft-icon-label('Video');   }
+      .asset-other   .asset-icon { @include loft-icon-label('File');    }
     }
   }
 }
@@ -237,7 +241,7 @@
 /* Desktop ----------------------------------------------------------------- */
 @media #{$desktop} {
   // BACK
-  .loft .list:not(:first-child) .back { @include hide; }
+  .loft .list:not(:first-child) .back { display: none; }
 
   // GRID MODE
   .assets-switch-mode { left: 1em; }

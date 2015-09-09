@@ -9,35 +9,20 @@ Add to ```Gemfile```:
 
     gem 'loft'
 
-Setup a new model for assets ```asset.rb```:
-
-```ruby
-class Asset
-  include Mongoid::Document
-  include Mongoid::LoftAsset
-end
-```
-
-Add controller for asset model to make it accesible via CMS, e.g. ```app/controllers/admin/assets_controller.rb```:
-
-```ruby
-class Admin::AssetsController < Admin::BaseController
-  mongosteen
-
-  has_scope :by_type
-end
-```
-
 Add admin assets controller to ```routes.rb```:
 
 ```ruby
-resources :assets
+resources :assets, controller: 'assets'
 ```
 
-Add to ```admin.scss```:
+Add to ```admin.scss``` and ```admin.coffee```:
 
 ```scss
 @import "loft";
+```
+
+```coffee
+#= require loft
 ```
 
 Add to ```admin.coffee``` character configuration object:
@@ -47,9 +32,10 @@ loft: new Loft('Files', 'asset', '/admin/assets')
 ```
 
 
-## Notes
+## TODO Notes
 
 1. Check out [kraken.io](https://github.com/kraken-io/kraken-ruby) for image optimization.
+
 
 ## Loft family
 
