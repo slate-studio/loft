@@ -28,7 +28,7 @@ Add to ```admin.scss``` and ```admin.coffee```:
 Add to ```admin.coffee``` character configuration object:
 
 ```coffee
-loft: new Loft('Files', 'asset', '/admin/assets')
+loft: new Loft()
 ```
 
 

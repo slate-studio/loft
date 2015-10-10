@@ -11,18 +11,18 @@
 # -----------------------------------------------------------------------------
 #
 # Public methods:
-#   new Loft(title, resource, resourcePath, @arrayStoreClass, @arrayStoreConfig)
+#   new Loft(title, resource, resourcePath)
 #   showModal(assetType, @selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
 #   closeModal()
 #
 # -----------------------------------------------------------------------------
 class @Loft
-  constructor: (title, resource, resourcePath, @arrayStoreClass, @arrayStoreConfig) ->
+  constructor: (title='Media', resource='asset', resourcePath='/admin/assets') ->
     @module = {}
     @store  = {}
 
-    @arrayStoreClass  ?= RailsArrayStore
-    @arrayStoreConfig ?=
+    @arrayStoreClass  = RailsArrayStore
+    @arrayStoreConfig =
       resource:    resource
       path:        resourcePath
       sortBy:      'created_at'

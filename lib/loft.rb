@@ -2,6 +2,7 @@ require 'chr'
 require 'ants'
 require 'mongosteen'
 require 'mini_magick'
+require 'mongoid_search'
 require 'mongoid-grid_fs'
 require 'carrierwave/mongoid'
 

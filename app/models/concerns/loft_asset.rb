@@ -1,5 +1,4 @@
 require 'autoinc'
-require 'mongoid_search'
 
 module LoftAsset
   extend ActiveSupport::Concern

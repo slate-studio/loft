@@ -25,6 +25,7 @@ to upload, manage and insert files into documents.
   s.add_dependency("ants",                ">= 0.2.0")
   s.add_dependency("mongosteen",          ">= 0.1.8")
   s.add_dependency("mongoid-autoinc",     ">= 4.0.0")
+  s.add_dependency('mongoid_search',      ">= 0.3")
   s.add_dependency("mini_magick",         ">= 4.1.0")
   s.add_dependency("mongoid-grid_fs",     ">= 2.1.0")
   s.add_dependency("carrierwave-mongoid", ">= 0.7.1")
