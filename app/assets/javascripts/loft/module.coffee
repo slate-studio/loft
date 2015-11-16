@@ -32,7 +32,8 @@ class @Loft
     @_uploadsCounter = 0
 
     moduleConfig =
-      title:                title
+      title: title
+      menuIcon: 'cloud-upload'
       showNestedListsAside: true
       items:
         loft_all:      @_nested_list_config 'All'
@@ -184,8 +185,3 @@ class @Loft
     # select active item
     @module.rootList.$items.children().removeClass('active')
     @module.rootList.$items.children("[href='#/loft/loft_#{ assetType }']").addClass('active')
-
-
-
-
-
