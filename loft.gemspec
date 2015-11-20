@@ -21,7 +21,7 @@ to upload, manage and insert files into documents.
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ['lib']
 
-  s.add_dependency("chr",                 ">= 0.4.0")
+  s.add_dependency("chr",                 ">= 0.4.19")
   s.add_dependency("ants",                ">= 0.2.0")
   s.add_dependency("mongosteen",          ">= 0.1.8")
   s.add_dependency("mongoid-autoinc",     ">= 4.0.0")

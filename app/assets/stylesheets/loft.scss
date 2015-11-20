@@ -127,13 +127,22 @@
 
 // UPLOAD BUTTON
 
+.loft .list-aside .header:before {
+  @include position(absolute, 0px 0px null null);
+  @include header-icon-base;
+  display: block;
+  content: "\f067";
+  font-family: "FontAwesome";
+  color: $positive-color;
+}
+
 .asset-upload {
-  @include position(absolute, 0 -40px null null);
-  @include icon-plus($positive-color);
+  @include position(absolute, 0px 0px null null);
   @include no-focus-outline;
-  cursor       : pointer;
-  padding-left : 80px;
-  &:before { @include position(absolute, null null null 0); }
+  line-height: 40px;
+  width: 40px;
+  padding-left: 40px;
+  cursor: pointer;
 }
 
 .list header .asset-upload + .search { @include position(absolute, 0 40px null null); }
