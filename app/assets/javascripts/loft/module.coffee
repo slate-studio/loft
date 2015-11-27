@@ -55,6 +55,9 @@ class @Loft
   _initialize_module: (module) ->
     @module = module
     @store  = @module.nestedLists.loft_all.config.arrayStore
+    @nestedLists = @module.nestedLists
+    moduleName = @module.name
+    firstNestedListPath = _firstNonEmptyValue(@nestedLists).path
 
     # API method
     @module.showModal = (assetType, selectMultipleAssets, callback, closeOnAccept) =>
@@ -84,6 +87,12 @@ class @Loft
     # enable grid mode as default on desktop/tablet
     if ! chr.isMobile()
       @module.$el.addClass('grid-mode')
+
+    @module.$el.addClass("module-categories")
+    if chr.isDesktop()
+      chr.$mainMenu
+        .find(".menu-#{moduleName}")
+        .attr("href", firstNestedListPath)
 
 
   _nested_list_config: (moduleName, assetType) ->
@@ -119,7 +128,10 @@ class @Loft
     list.groupActions = new LoftGroupActions(list, this)
 
     # grid/list checkbox
-    list.$switchMode =$ "<a class='assets-switch-mode' href='#'></a>"
+    list.$switchMode =$ """<a class='assets-switch-mode' href='#'>
+                             <i class='fa fa-fw fa-th-large'></i>
+                             <i class='fa fa-fw fa-th-list'></i>
+                           </a>"""
     list.$backBtn.after list.$switchMode
     list.$switchMode.on 'click', (e) => e.preventDefault() ; @module.$el.toggleClass('grid-mode')
 

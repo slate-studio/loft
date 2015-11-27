@@ -2,11 +2,9 @@
 // Basic styles for Loft Character CMS plugin, this should be included in
 // admin.scss (default)
 // -----------------------------------------------------------------------
-
 @import "inputs/loft-image";
 
 // MIXINS
-
 @mixin loft-icon-label($title) {
   &:before {
     display: block; margin-top: 2.6em;
@@ -22,7 +20,6 @@
 }
 
 // ASSET TYPE ICONS
-
 .loft .list:first-child .items {
   .item {
     .item-title { margin-left: 2.05em; }
@@ -59,9 +56,7 @@
   }
 }
 
-
 // LIST MODE
-
 .loft .list:not(:first-child) .items .item.asset {
   padding-left: 6.25em; // 100px;
 
@@ -105,14 +100,10 @@
   &.edit-name .asset-name { display: block; }
 }
 
-
 // LIST-GRID MODE SWITCHER
-
 .assets-switch-mode { display: none; }
 
-
 // GROUP ACTIONS
-
 .assets-group-actions {
   @include position(absolute, 0 0 0 0); background: white;
   .accept   { color: $positive-color;  float: right; margin-right: 1em; }
@@ -124,9 +115,7 @@
 .module-modal .assets-group-actions .accept { display: inline; }
 .module-modal .assets-group-actions .delete { display: none;   }
 
-
 // UPLOAD BUTTON
-
 .loft .list-aside .header:before {
   @include position(absolute, 0px 0px null null);
   @include header-icon-base;
@@ -149,9 +138,7 @@
 .list.list-search header .asset-upload + .search { @include position(absolute, 0 0 null 0); }
 .loft.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
 
-
 // MODAL MODE
-
 .loft {
   .modal-close { display: none; }
   &.module-modal {
@@ -172,7 +159,6 @@
   }
 }
 
-
 /* Tablet ------------------------------------------------------------------ */
 @media #{$tablet} {
   // ITEMS
@@ -191,17 +177,20 @@
   .loft.module-modal { @include position(absolute, 1.5em 1.5em 0em 1.5em) }
   .loft.module-modal .header { top: 0; left: 0; right: 0; width: auto; }
 
-
   // GRID MODE
   .assets-switch-mode {
     @include position(absolute, null null null 1em);
     display: inline; line-height: 2.5; left: 3em;
-    &:before { content: 'Grid'; color: lighten($base-font-color, 50%); margin-right: .25em; }
-    &:after  { content: 'List'; color: lighten($base-font-color, 35%); }
+    i:first-child { color: $border-color; }
+    i:last-child { color: rgba($base-font-color, .4); }
+    // &:before { content: 'Grid'; color: lighten($base-font-color, 50%); margin-right: .25em; }
+    // &:after  { content: 'List'; color: lighten($base-font-color, 35%); }
   }
   .loft.grid-mode .assets-switch-mode {
-    &:before { color: lighten($base-font-color, 35%); }
-    &:after  { color: lighten($base-font-color, 50%);  }
+    i:first-child { color: rgba($base-font-color, .4); }
+    i:last-child { color: $border-color; }
+    // &:before { color: lighten($base-font-color, 35%); }
+    // &:after  { color: lighten($base-font-color, 50%);  }
   }
 
   .loft.grid-mode {
@@ -245,7 +234,6 @@
   }
 }
 
-
 /* Desktop ----------------------------------------------------------------- */
 @media #{$desktop} {
   // BACK
@@ -254,7 +242,3 @@
   // GRID MODE
   .assets-switch-mode { left: 1em; }
 }
-
-
-
-
