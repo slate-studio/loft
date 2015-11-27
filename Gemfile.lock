@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    loft (0.2.8)
+    loft (0.2.9)
       ants (>= 0.2.0)
       carrierwave-mongoid (>= 0.7.1)
       chr (>= 0.4.19)

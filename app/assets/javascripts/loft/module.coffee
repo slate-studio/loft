@@ -65,7 +65,9 @@ class @Loft
     @selectMultipleAssets = true
 
     # modal close button
-    @module.rootList.$modalCloseBtn =$ "<a href='#' class='modal-close'>Cancel</a>"
+    @module.rootList.$modalCloseBtn =$ """<a href='#' class='modal-close'>
+                                            <i class='fa fa-times'></i>
+                                          </a>"""
     @module.rootList.$header.prepend @module.rootList.$modalCloseBtn
     @module.rootList.$modalCloseBtn.on 'click', (e) => e.preventDefault() ; @closeModal()
 

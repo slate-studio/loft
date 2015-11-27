@@ -152,7 +152,11 @@
       content: ''; display: block; background: rgba(0,0,0,.25);
     }
 
-    .modal-close { @include position(absolute, null null null 1em ); display: inline-block; }
+    .modal-close {
+      @include header-icon-base;
+      @include position(absolute, null 0 null null);
+      display: block;
+    }
     .header { top: 0; left: .5em; right: .5em; width: auto; }
 
     .list:first-child .back { display: none; }
@@ -183,14 +187,10 @@
     display: inline; line-height: 2.5; left: 3em;
     i:first-child { color: $border-color; }
     i:last-child { color: rgba($base-font-color, .4); }
-    // &:before { content: 'Grid'; color: lighten($base-font-color, 50%); margin-right: .25em; }
-    // &:after  { content: 'List'; color: lighten($base-font-color, 35%); }
   }
   .loft.grid-mode .assets-switch-mode {
     i:first-child { color: rgba($base-font-color, .4); }
     i:last-child { color: $border-color; }
-    // &:before { color: lighten($base-font-color, 35%); }
-    // &:after  { color: lighten($base-font-color, 50%);  }
   }
 
   .loft.grid-mode {
