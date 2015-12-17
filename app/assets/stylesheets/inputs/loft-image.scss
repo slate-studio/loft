@@ -1,8 +1,49 @@
 .input-loft-image {
-  input               { margin-bottom: .25em; }
-  .image img          { max-height: 6em; margin: .25em .75em .25em 0; float: left; }
-  .remove             { display: none; }
 
-  &.has-value         { min-height: 11em; }
+  input { margin-bottom: .25em; }
+  .image img { max-height: 6em; margin: .25em .75em .25em 0; float: left; }
+  .remove { display: none; }
+
+  &.has-value { min-height: 11em; }
   &.has-value .remove { display: inline; }
+}
+
+.input-loft-image.fullsize-preview {
+  @include no-bottom-border;
+  @include position(absolute, 3.3em null null 0.5em);
+  z-index: 1;
+  width: 5em;
+  height: 5em;
+  min-height: 5em;
+  background-color: $border-color;
+  background-size: cover;
+  padding: 0.15em;
+
+  input,
+  .label-title,
+  .error-message { display: none; }
+
+  button {
+    width: 2em;
+    line-height: 2;
+    text-align: center;
+    border: 0;
+    padding: 0;
+    border-radius: 1.75em;
+    margin: 0.15em;
+  }
+}
+
+/* Tablet ------------------------------------------------------------------ */
+@media #{$tablet} {
+  .input-loft-image.fullsize-preview {
+    padding: 0.25em;
+    width: 14em;
+    height: 14em;
+
+    button {
+      width: 2.5em;
+      line-height: 2.5;
+    }
+  }
 }
