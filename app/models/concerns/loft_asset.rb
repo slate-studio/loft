@@ -1,19 +1,12 @@
-require 'autoinc'
-
 module LoftAsset
   extend ActiveSupport::Concern
-
   included do
-
     include Mongoid::Timestamps
     include Mongoid::Autoinc
     include Mongoid::Search
-
     include Ants::Id
-
     include ActionView::Helpers::DateHelper
     include ActionView::Helpers::NumberHelper
-
 
     ## Attributes
     field :name,           default: ''
@@ -31,42 +24,35 @@ module LoftAsset
     field :_number, type: Integer
     increments :_number
 
-
     ## Uploaders
     mount_uploader :file, AssetFileUploader
-
 
     ## Validations
     validates :file, presence: true
 
-
     ## Search
     search_in :name, :filename
 
-
     ## Scopes
-    default_scope   -> { desc(:created_at) }
+    default_scope -> { desc(:created_at) }
     scope :by_type, -> asset_type { where(type: asset_type) }
-
+    scope :images, -> { where(type: "image") }
+    scope :not_images, -> { where(:type.ne => "image" ) }
 
     ## Indexes
     index({ created_at: -1 })
 
-
     ## Callbacks
     before_save :update_asset_attributes
-
 
     ## Helpers
     def _list_item_title
       name
     end
 
-
     def _list_item_subtitle
       time_ago_in_words(self.created_at) + " ago"
     end
-
 
     def _list_item_thumbnail
       if is_image?
@@ -76,29 +62,24 @@ module LoftAsset
       end
     end
 
-
     def content_type
       @content_type ||= file.content_type
     end
-
 
     def is_image?
       return false unless file?
       content_type.match(/image\//) ? true : false
     end
 
-
     def is_text?
       return false unless file?
       content_type.match(/text\//) ? true : false
     end
 
-
     def is_pdf?
       return false unless file?
       content_type.match(/pdf/) ? true : false
     end
-
 
     def is_archive?
       return false unless file?
@@ -106,18 +87,15 @@ module LoftAsset
       content_type.match(/zip/) ? true : false
     end
 
-
     def is_audio?
       return false unless file?
       content_type.match(/audio\//) ? true : false
     end
 
-
     def is_video?
       return false unless file?
       content_type.match(/video\//) ? true : false
     end
-
 
     def update_asset_attributes
       if file.present? && file_changed?
@@ -144,6 +122,5 @@ module LoftAsset
       self.name = self.name.empty? ? self.filename : self.name
     end
     private :update_asset_attributes
-
   end
 end

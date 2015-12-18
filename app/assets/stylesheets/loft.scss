@@ -1,10 +1,11 @@
-// -----------------------------------------------------------------------
-// Basic styles for Loft Character CMS plugin, this should be included in
-// admin.scss (default)
-// -----------------------------------------------------------------------
 @import "inputs/loft-image";
 
 // MIXINS
+@mixin loft-icon-base($bgSize, $width, $height) {
+  display: block; background-size: $bgSize; width: $width; height: $height;
+  background-image: image-url("loft/library@3x.png");
+}
+
 @mixin loft-icon-label($title) {
   &:before {
     display: block; margin-top: 2.6em;
@@ -14,51 +15,9 @@
   }
 }
 
-@mixin loft-icon-base($bgSize, $width, $height) {
-  display: block; background-size: $bgSize; width: $width; height: $height;
-  background-image: image-url("loft/library@3x.png");
-}
-
-// ASSET TYPE ICONS
-.loft .list:first-child .items {
-  .item {
-    .item-title { margin-left: 2.05em; }
-    &:before    { @include position(absolute, null null null 1em); content: ''; display: block; }
-  }
-
-  .item {
-    &:before         {    @include loft-icon-base(32px 112px, 16px, 16px); }
-    &.active:before  {    background-position: 16px   0px; }
-  }
-  .item:nth-child(2) {
-    &:before            { background-position:  0px -16px; }
-    &.active { &:before { background-position: 16px -16px; } }
-  }
-  .item:nth-child(3) {
-    &:before            { background-position:  0px -32px; }
-    &.active { &:before { background-position: 16px -32px; } }
-  }
-  .item:nth-child(4) {
-    &:before            { background-position:  0px -48px; }
-    &.active { &:before { background-position: 16px -48px; } }
-  }
-  .item:nth-child(5) {
-    &:before            { background-position:  0px -64px; }
-    &.active { &:before { background-position: 16px -64px; } }
-  }
-  .item:nth-child(6) {
-    &:before            { background-position:  0px -80px; }
-    &.active { &:before { background-position: 16px -80px; } }
-  }
-  .item:nth-child(7) {
-    &:before            { background-position:  0px -96px; }
-    &.active { &:before { background-position: 16px -96px; } }
-  }
-}
-
 // LIST MODE
-.loft .list:not(:first-child) .items .item.asset {
-  padding-left: 6.25em; // 100px;
+.list.loft .items .item.asset {
+  padding-left: 6.25em;
 
   // checkbox
   .asset-checkbox {
@@ -116,7 +75,7 @@
 .module-modal .assets-group-actions .delete { display: none;   }
 
 // UPLOAD BUTTON
-.loft .list-aside .header:before {
+.list.loft .header:before {
   @include position(absolute, 0px 0px null null);
   @include header-icon-base;
   display: block;
@@ -136,38 +95,80 @@
 
 .list header .asset-upload + .search { @include position(absolute, 0 40px null null); }
 .list.list-search header .asset-upload + .search { @include position(absolute, 0 0 null 0); }
-.loft.assets-uploading .list:not(:first-child) header .spinner { display: inline-block; }
+.loft.assets-uploading .list header .spinner { visibility: visible; }
 
 // MODAL MODE
 .loft {
   .modal-close { display: none; }
   &.module-modal {
-    @include position(absolute, 0 .5em 0 .5em); z-index: 1100;
+    @include position(absolute, 0 .5em 0 .5em);
+    z-index: 1100;
 
     &:after { display: none; }
 
-    // dark background
     &:before {
-      @include position(fixed, 0px 0px 0px 0px); z-index: 0;
-      content: ''; display: block; background: rgba(0,0,0,.25);
+      @include position(fixed, 0px 0px 0px 0px);
+      z-index: 0;
+      content: '';
+      display: block;
+      background: rgba(0, 0, 0, 0.25);
     }
 
     .modal-close {
       @include header-icon-base;
-      @include position(absolute, null 0 null null);
+      @include position(absolute, null null null 0);
       display: block;
-    }
-    .header { top: 0; left: .5em; right: .5em; width: auto; }
+      color: $secondary-font-color;
 
-    .list:first-child .back { display: none; }
+      &:hover {
+        color: $base-font-color;
+      }
+    }
+
+    .header {
+      top: 0;
+      left: 0.5em;
+      right: 0.5em;
+      width: auto;
+    }
+
+    .back {
+      display: none;
+    }
   }
 }
 
-/* Tablet ------------------------------------------------------------------ */
+/* Tablet ----------------------------------------------------------------- */
 @media #{$tablet} {
+  // LAYOUT
+  .list.loft {
+    width: initial;
+    background-color: $bg-color;
+
+    .header {
+      background-color: $bg-color;
+    }
+
+    .item {
+      background-color: $white-color;
+    }
+  }
+
   // ITEMS
-  .loft .list:not(:first-child) .items { font-size: 1em; }
-  .loft .list:not(:first-child) .items .item.asset {
+  .list.loft .items {
+    font-size: 1em;
+    padding-top: 1.5em;
+  }
+
+  .list.loft .item {
+    @include no-bottom-border;
+    background-color: $white-color;
+    box-shadow: 0 0 1px rgba(0,0,0,0.15);
+    margin: 0 auto;
+    max-width: 44em;
+  }
+
+  .list.loft .items .item.asset {
     padding-top: 19px; padding-bottom: 19px;
     .item-title {
       display: inline; cursor: pointer;
@@ -183,62 +184,66 @@
 
   // GRID MODE
   .assets-switch-mode {
-    @include position(absolute, null null null 1em);
-    display: inline; line-height: 2.5; left: 3em;
+    @include position(absolute, null 5.5em null null);
+    display: inline-block;
+    line-height: 2.5;
     i:first-child { color: $border-color; }
-    i:last-child { color: rgba($base-font-color, .4); }
+    i:last-child { color: rgba($base-font-color, 0.4); }
   }
+
   .loft.grid-mode .assets-switch-mode {
-    i:first-child { color: rgba($base-font-color, .4); }
+    i:first-child { color: rgba($base-font-color, 0.4); }
     i:last-child { color: $border-color; }
   }
 
-  .loft.grid-mode {
-    .list:not(:first-child) .items {
-      padding: 1em .25em 5em .75em;
-      .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }
+  .loft.grid-mode .list .items {
+    padding: 1em .25em 5em .75em;
 
-      .item.asset {
-        padding-left: 1em; width: 222px; height: 222px;
-        @include no-bottom-border; border: 1px solid rgba($base-font-color, .2); border-radius: 4px;
+    .item.asset { margin: 0 .75em 1.5em; float: left; display: inline-block; }
 
-        // checkbox: position + decoration
-        .asset-checkbox {
-          top: 10px; left: 10px; width: 24px; height: 24px; background: white;
-          box-shadow: 0 1px 0 rgba(0,0,0,0.05),1px 0 0 rgba(0,0,0,0.05); border-bottom-right-radius: 4px;
-        }
+    .item.asset {
+      padding-left: 1em; width: 222px; height: 222px;
+      @include no-bottom-border;
+      box-shadow: 0 0 1px rgba(0,0,0,0.2);
+      border-radius: 4px;
 
-        // thumbnail
-        .asset-icon {
-          @include position(absolute, 10px null null 10px);
-          width: 200px; height: 150px; background: white; border-radius: 0;
-          &:after { @include position(absolute, 0px 0px 0px 0px); box-shadow: 0 0 1px rgba(0,0,0,0.2) inset; content: ''; display: block; }
-        }
-
-        .asset-thumbnail-small  { display: none;  }
-        .asset-thumbnail-medium { display: block; }
-
-        // name & subtitle
-        .item-title { display: block; margin-top: 9.45em; }
-        .item-subtitle { display: block; position: initial; margin-top: .3em; }
-        &.edit-name .asset-name { top: inherit; bottom: 27px; left: 10px; right: 10px; }
+      // checkbox: position + decoration
+      .asset-checkbox {
+        top: 10px;
+        left: 10px;
+        width: 24px;
+        height: 24px;
+        background: $white-color;
+        box-shadow: 0 1px 0 rgba(0,0,0,0.05),1px 0 0 rgba(0,0,0,0.05);
+        border-bottom-right-radius: 4px;
       }
 
-      // asset type labels
-      .asset-text    .asset-icon { @include loft-icon-label('Text');    }
-      .asset-archive .asset-icon { @include loft-icon-label('Archive'); }
-      .asset-audio   .asset-icon { @include loft-icon-label('Audio');   }
-      .asset-video   .asset-icon { @include loft-icon-label('Video');   }
-      .asset-other   .asset-icon { @include loft-icon-label('File');    }
+      // thumbnail
+      .asset-icon {
+        @include position(absolute, 10px null null 10px);
+        width: 200px; height: 150px; background: white; border-radius: 0;
+        &:after {
+          @include position(absolute, 0 0 0 0);
+          box-shadow: 0 0 1px rgba(0,0,0,0.2) inset;
+          content: '';
+          display: block;
+        }
+      }
+
+      .asset-thumbnail-small { display: none; }
+      .asset-thumbnail-medium { display: block; }
+
+      // name & subtitle
+      .item-title { display: block; margin-top: 9.45em; }
+      .item-subtitle { display: block; position: initial; margin-top: .3em; }
+      &.edit-name .asset-name { top: inherit; bottom: 27px; left: 10px; right: 10px; }
     }
+
+    // asset type labels
+    .asset-text .asset-icon { @include loft-icon-label('Text'); }
+    .asset-archive .asset-icon { @include loft-icon-label('Archive'); }
+    .asset-audio .asset-icon { @include loft-icon-label('Audio'); }
+    .asset-video .asset-icon { @include loft-icon-label('Video'); }
+    .asset-other .asset-icon { @include loft-icon-label('File'); }
   }
-}
-
-/* Desktop ----------------------------------------------------------------- */
-@media #{$desktop} {
-  // BACK
-  .loft .list:not(:first-child) .back { display: none; }
-
-  // GRID MODE
-  .assets-switch-mode { left: 1em; }
 }

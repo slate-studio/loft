@@ -1,11 +1,6 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Kravets <alex@slatestudio.com>,
 #         Slate Studio (http://www.slatestudio.com)
-#
-# Coding Guide:
-#   https://github.com/thoughtbot/guides/tree/master/style/coffeescript
-# -----------------------------------------------------------------------------
-
 # -----------------------------------------------------------------------------
 # Loft Group Actions
 # -----------------------------------------------------------------------------
@@ -14,8 +9,7 @@ class @LoftGroupActions
     @_render()
     @_bind_checkboxes()
 
-
-  # PRIVATE ===============================================
+  # PRIVATE ===================================================================
 
   _render: ->
     @$el =$ "<div class='assets-group-actions' style='display:none;'></div>"
@@ -36,7 +30,6 @@ class @LoftGroupActions
     @$unselectBtn.on 'click', (e) => e.preventDefault(); @_unselect_list_items()
     @$el.append @$unselectBtn
 
-
   _bind_checkboxes: ->
     @list.$el.on 'click', '.asset .asset-checkbox input', (e) =>
       # when multiple selection disabled select only one asset a time
@@ -49,21 +42,18 @@ class @LoftGroupActions
       else
         @hide()
 
-
   _select_single_item: ($checkbox) ->
     if $checkbox.prop('checked')
       @list.$el.find('.asset .asset-checkbox input:checked').prop('checked' , false)
       $checkbox.prop('checked', true)
 
-
   _selected_list_items: ->
-    $.map @list.$el.find('.asset .asset-checkbox input:checked'), (checkbox) -> $(checkbox).parent().parent()
-
+    $.map @list.$el.find('.asset .asset-checkbox input:checked'), (checkbox) ->
+      $(checkbox).parent().parent()
 
   _unselect_list_items: ->
     @list.$el.find('.asset .asset-checkbox input').prop('checked', false)
     @hide()
-
 
   _delete_selected_list_items: ->
     if confirm("Are you sure?")
@@ -78,7 +68,6 @@ class @LoftGroupActions
           onSuccess: => # success notification
           onError:   => # error notification
       @hide()
-
 
   _accept_selected_items: ->
     $selectedItems  = @_selected_list_items()
@@ -96,16 +85,10 @@ class @LoftGroupActions
     else
       @loft.onAcceptCallback(objects, => @loft.closeModal())
 
-
   _show: ->
     @$el.show()
 
-
-  # PUBLIC ================================================
+  # PUBLIC ====================================================================
 
   hide: ->
     @$el.hide()
-
-
-
-

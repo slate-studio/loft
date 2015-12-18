@@ -1,11 +1,6 @@
 # -----------------------------------------------------------------------------
 # Author: Alexander Kravets <alex@slatestudio.com>,
 #         Slate Studio (http://www.slatestudio.com)
-#
-# Coding Guide:
-#   https://github.com/thoughtbot/guides/tree/master/style/coffeescript
-# -----------------------------------------------------------------------------
-
 # -----------------------------------------------------------------------------
 # Loft Asset Item
 # -----------------------------------------------------------------------------
@@ -14,8 +9,7 @@ class @LoftAssetItem extends Item
     @$el =$ "<div class='item asset asset-#{ @object.type }' data-id='#{ @object._id }'></div>"
     @render()
 
-
-  # PRIVATE ===============================================
+  # PRIVATE ===================================================================
 
   _bind_name_input: ->
     @$nameInput.on 'blur',  (e) => @_update_name_if_changed()
@@ -23,17 +17,14 @@ class @LoftAssetItem extends Item
       if e.keyCode == 13 then $(e.target).blur()
       if e.keyCode == 27 then @_cancel_name_change()
 
-
   _edit_name: (e) ->
     @$el.addClass('edit-name')
     @$nameInput.focus().select()
-
 
   _cancel_name_change: ->
     @$el.removeClass('edit-name')
     name = @$title.html()
     @$nameInput.val(name)
-
 
   _update_name_if_changed: ->
     @$el.removeClass('edit-name')
@@ -46,8 +37,7 @@ class @LoftAssetItem extends Item
       onSuccess: (object) =>
       onError:   (errors) => # process errors
 
-
-  # PUBLIC ================================================
+  # PUBLIC ====================================================================
 
   render: ->
     @$el.html('').removeClass('item-folder has-subtitle has-thumbnail')
@@ -72,7 +62,6 @@ class @LoftAssetItem extends Item
     @$checkbox.append(@$checkboxInput)
     @$el.prepend(@$checkbox)
 
-
     # input for assets name
     name = @$title.text()
     @$name      =$ "<div class='asset-name'></div>"
@@ -83,7 +72,3 @@ class @LoftAssetItem extends Item
 
     # handler for asset name change on title click
     @$title.on 'click', (e) => @_edit_name(e)
-
-
-
-
