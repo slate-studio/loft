@@ -46,9 +46,7 @@ module LoftAsset
     before_save :update_asset_attributes
 
     ## Helpers
-    def _list_item_title
-      name
-    end
+    alias_attribute :_list_item_title, :name
 
     def _list_item_subtitle
       time_ago_in_words(self.created_at) + " ago"
