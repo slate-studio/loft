@@ -21,16 +21,15 @@ RedactorPlugins.loft = ->
       fileButton = @button.add('file', 'Insert File')
       @button.addCallback(fileButton, @loft.showAllModal)
 
-
     showImagesModal: ->
-      chr.modules.loft.showModal 'images', true, (objects) => @loft.insertImages(objects)
-
+      chr.modules.loft.showImages true, (objects) =>
+        @loft.insertImages(objects)
 
     # allow multiple assets when no text is selected
     showAllModal: ->
       multipleAssets = this.selection.getText() == ''
-      chr.modules.loft.showModal 'all', multipleAssets, (objects) => @loft.insertFiles(objects)
-
+      chr.modules.loft.showAll multipleAssets, (objects) =>
+        @loft.insertFiles(objects)
 
     # if text is selected replace text with <a>{{ text }}</a>
     # otherwise add link(s) split by <br/> tag
@@ -48,7 +47,6 @@ RedactorPlugins.loft = ->
 
         this.insert.html(html, false)
 
-
     insertImages: (objects) ->
       if objects.length > 0
         images = []
@@ -59,9 +57,4 @@ RedactorPlugins.loft = ->
 
         this.insert.html(html, false)
 
-
   return methods
-
-
-
-

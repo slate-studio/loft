@@ -6,7 +6,9 @@
 # -----------------------------------------------------------------------------
 # Public methods:
 #   new Loft(title, resource, resourcePath)
-#   showModal(assetType, @selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
+#   showAll(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
+#   showImages(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
+#   showDocuments(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
 #   closeModal()
 # -----------------------------------------------------------------------------
 class @Loft
@@ -48,11 +50,12 @@ class @Loft
     @selectMultipleAssets = true
     @store = @module.rootList.config.arrayStore
 
-    @module.showModal = (assetType, selectMultipleAssets, callback, closeOnAccept) =>
-      @showModal(assetType, selectMultipleAssets, callback, closeOnAccept)
-
     @_add_close_button()
     @_enable_grid_mode()
+
+    @module.showAll = $.proxy(@showAll, this)
+    @module.showImages = $.proxy(@showImages, this)
+    @module.showDocuments = $.proxy(@showDocuments, this)
 
   _add_close_button: ->
     @module.rootList.$modalCloseBtn =$ """<a href='#' class='modal-close'>
@@ -121,15 +124,24 @@ class @Loft
     list.groupActions.hide()
     list.$items.find(".asset-checkbox").prop("checked", false)
 
+  _show_modal: ($tab) ->
+    @module.$el.addClass("module-modal")
+    @module.show()
+    @module.activeList.selectTab($tab, true)
+
   # PUBLIC ====================================================================
+
+  showAll: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+    @_show_modal(@module.rootList.tabLinks[0])
+
+  showImages: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+    @_show_modal(@module.rootList.tabLinks[1])
+
+  showDocuments: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+    @_show_modal(@module.rootList.tabLinks[2])
 
   closeModal: ->
     @selectMultipleAssets = true
     @_clear_assets_selection(@module.activeList)
     @module.$el.removeClass("module-modal")
     @module.hide()
-
-  showModal: (assetType="all", @selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
-    @module.$el.addClass("module-modal")
-    @module.show()
-    @module.activeList.updateItems()

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary  = "Media assets manager for Character CMS"
   s.description = <<-DESC
 This plugin adds an assets library that provides an easy way
-to upload, manage and insert files into documents.
+to upload, manage and insert file links to documents.
   DESC
 
   s.rubyforge_project = "loft"

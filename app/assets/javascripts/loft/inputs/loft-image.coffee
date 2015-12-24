@@ -49,7 +49,7 @@ class @InputLoftImage extends InputString
     @$actions.append @$chooseBtn
 
     @$chooseBtn.on 'click', (e) =>
-      chr.modules.loft.showModal 'images', false, (objects) =>
+      chr.modules.loft.showImages false, (objects) =>
         asset = objects[0]
         @updateValue(asset.file.url)
 
