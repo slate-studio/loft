@@ -21,9 +21,9 @@ to upload, manage and insert file links to documents.
   s.files = `git ls-files`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency("chr", ">= 0.5.4")
-  s.add_dependency("ants", ">= 0.3.10")
-  s.add_dependency("mongosteen", ">= 0.1.8")
+  s.add_dependency("chr", ">= 0.5.8")
+  s.add_dependency("ants", ">= 0.3.14")
+  s.add_dependency("mongosteen", ">= 0.2.0")
   s.add_dependency("mongoid-autoinc", ">= 4.0.0")
   s.add_dependency("mongoid_search", ">= 0.3")
   s.add_dependency("mini_magick", ">= 4.1.0")

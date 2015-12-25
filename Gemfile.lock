@@ -2,14 +2,14 @@ PATH
   remote: .
   specs:
     loft (0.4.1)
-      ants (>= 0.3.10)
+      ants (>= 0.3.14)
       carrierwave-mongoid (>= 0.7.1)
-      chr (>= 0.5.4)
+      chr (>= 0.5.8)
       mini_magick (>= 4.1.0)
       mongoid-autoinc (>= 4.0.0)
       mongoid-grid_fs (>= 2.1.0)
       mongoid_search (>= 0.3)
-      mongosteen (>= 0.1.8)
+      mongosteen (>= 0.2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -49,7 +49,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    ants (0.3.13)
+    ants (0.3.14)
       devise
       meta-tags
       mongoid (>= 4.0)
@@ -70,11 +70,11 @@ GEM
       carrierwave (>= 0.8.0, < 0.11.0)
       mongoid (>= 3.0, < 6.0)
       mongoid-grid_fs (>= 1.3, < 3.0)
-    chr (0.5.7)
+    chr (0.5.8)
       bourbon
       coffee-rails (>= 4.0)
       font-awesome-rails
-      formagic (>= 0.3.9)
+      formagic (>= 0.3.10)
       jquery-rails
       rails (~> 4.2.5)
       sass-rails
@@ -99,7 +99,7 @@ GEM
     fast-stemmer (1.0.2)
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
-    formagic (0.3.9)
+    formagic (0.3.10)
       bourbon (>= 3.2)
       normalize-rails (>= 3.0)
     globalid (0.3.6)
