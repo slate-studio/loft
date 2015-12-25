@@ -78,12 +78,8 @@ class @LoftGroupActions
       object   = @list.config.arrayStore.get(objectId)
       objects.push object
 
-    if @loft.closeOnAccept
-      @loft.onAcceptCallback(objects)
-      @loft.closeModal()
-
-    else
-      @loft.onAcceptCallback(objects, => @loft.closeModal())
+    @loft.closeModal()
+    @loft.onAcceptCallback(objects)
 
   _show: ->
     @$el.show()

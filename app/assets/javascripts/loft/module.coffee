@@ -6,9 +6,9 @@
 # -----------------------------------------------------------------------------
 # Public methods:
 #   new Loft(title, resource, resourcePath)
-#   showAll(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
-#   showImages(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
-#   showDocuments(@selectMultipleAssets, @onAcceptCallback, @closeOnAccept)
+#   showAll(@selectMultipleAssets, @onAcceptCallback, @onCloseCallback)
+#   showImages(@selectMultipleAssets, @onAcceptCallback, @onCloseCallback)
+#   showDocuments(@selectMultipleAssets, @onAcceptCallback, @onCloseCallback)
 #   closeModal()
 # -----------------------------------------------------------------------------
 class @Loft
@@ -131,13 +131,13 @@ class @Loft
 
   # PUBLIC ====================================================================
 
-  showAll: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+  showAll: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @onCloseCallback=$.noop) ->
     @_show_modal(@module.rootList.tabLinks[0])
 
-  showImages: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+  showImages: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @onCloseCallback=$.noop) ->
     @_show_modal(@module.rootList.tabLinks[1])
 
-  showDocuments: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @closeOnAccept=true) ->
+  showDocuments: (@selectMultipleAssets=false, @onAcceptCallback=$.noop, @onCloseCallback=$.noop) ->
     @_show_modal(@module.rootList.tabLinks[2])
 
   closeModal: ->
@@ -145,3 +145,4 @@ class @Loft
     @_clear_assets_selection(@module.activeList)
     @module.$el.removeClass("module-modal")
     @module.hide()
+    @onCloseCallback?()
